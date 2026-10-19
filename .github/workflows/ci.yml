@@ -53,45 +53,20 @@ jobs:
           ditto -c -k --sequesterRsrc --keepParent "$APP" Lobby.zip
           ls -la Lobby.zip
 
-      # Run the zipped app on the runner for a few seconds. A crash at launch
-      # shows up here with its report, instead of as a bouncing Dock icon.
+      # Run the zipped app on the runner, two ways: straight from the shell
+      # with its resources carrying the download quarantine flag (as a
+      # downloaded copy does), and through LaunchServices like Finder.
       - name: Launch check
         run: |
+          sw_vers
           rm -rf launch && mkdir launch && ditto -x -k Lobby.zip launch
           APP=launch/Lobby.app
           echo "Embedded frameworks:"; ls "$APP/Contents/Frameworks" || echo "(none)"
           echo "Architectures:"; lipo -archs "$APP/Contents/MacOS/Lobby"
-          "$APP/Contents/MacOS/Lobby" > launch.log 2>&1 &
-          PID=$!
-          # The app logs "window ready" once its first window has laid out.
-          for i in $(seq 1 30); do
-            grep -q "window ready" launch.log && break
-            kill -0 "$PID" 2>/dev/null || break
-            sleep 1
-          done
-          if kill -0 "$PID" 2>/dev/null; then
-            if grep -q "window ready" launch.log; then
-              echo "Lobby launched and showed its window in ${i}s"
-              kill "$PID" || true
-              echo "--- app output ---"; cat launch.log
-            else
-              echo "::error::Lobby was alive after 30 seconds but never showed its window (a hang)"
-              echo "--- app output ---"; cat launch.log
-              echo "--- main thread sample ---"
-              sample "$PID" 3 -file sample.txt >/dev/null 2>&1 || true
-              awk '/com.apple.main-thread/{p=1} p{print} /^$/{if(p){exit}}' sample.txt | head -90
-              kill "$PID" || true
-              exit 1
-            fi
-          else
-            CODE=0; wait "$PID" || CODE=$?
-            echo "::error::Lobby exited with code $CODE within 15 seconds"
-            echo "--- app output ---"; cat launch.log
-            sleep 5
-            echo "--- crash reports ---"; ls ~/Library/Logs/DiagnosticReports/ 2>/dev/null || true
-            for f in ~/Library/Logs/DiagnosticReports/Lobby*; do [ -f "$f" ] && head -150 "$f"; done
-            exit 1
-          fi
+          xattr -rw com.apple.quarantine "0083;00000000;Safari;" "$APP/Contents/Resources"
+          scripts/launch-check.sh "$APP" direct
+          xattr -rd com.apple.quarantine "$APP"
+          scripts/launch-check.sh "$APP" open
 
       - uses: actions/upload-artifact@v4
         with:
