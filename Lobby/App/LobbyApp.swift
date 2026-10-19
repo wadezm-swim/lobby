@@ -2,13 +2,22 @@ import AppKit
 import Carbon.HIToolbox
 import SwiftUI
 
+/// The real entry point, so the launch diary gets a line before SwiftUI,
+/// AppKit or the model do anything at all.
 @main
+enum LobbyMain {
+    static func main() {
+        LaunchLog.note("process started", fresh: true)
+        LobbyApp.main()
+    }
+}
+
 struct LobbyApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @State private var model = AppModel.shared
 
     init() {
-        LaunchLog.note("starting", fresh: true)
+        LaunchLog.note("app init")
         FontRegistry.registerBundledFonts()
         LaunchLog.note("fonts registered")
         // Before anything touches Firebase. Quietly does nothing without the config file.

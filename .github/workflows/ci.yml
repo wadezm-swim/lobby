@@ -63,10 +63,12 @@ jobs:
           APP=launch/Lobby.app
           echo "Embedded frameworks:"; ls "$APP/Contents/Frameworks" || echo "(none)"
           echo "Architectures:"; lipo -archs "$APP/Contents/MacOS/Lobby"
-          xattr -rw com.apple.quarantine "0083;00000000;Safari;" "$APP/Contents/Resources"
           scripts/launch-check.sh "$APP" direct
-          xattr -rd com.apple.quarantine "$APP"
-          scripts/launch-check.sh "$APP" open || echo "::warning::Launched through LaunchServices, the runner didn't see the window. See the log above."
+          # Now as a real download: every file quarantined, launched by LaunchServices.
+          # Gatekeeper would show a dialog nobody can click, so pre-approve this one app.
+          xattr -rw com.apple.quarantine "0083;00000000;Safari;" "$APP"
+          sudo spctl --add --label "Lobby launch check" "$APP" || echo "spctl add refused"
+          scripts/launch-check.sh "$APP" open || echo "::warning::Launched through LaunchServices with quarantine on, the runner didn't see the window. See the log above."
 
       - uses: actions/upload-artifact@v4
         with:
