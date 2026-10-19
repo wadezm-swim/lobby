@@ -62,11 +62,21 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release delete latest --cleanup-tag --yes || true
-          gh release create latest Lobby.zip \
-            --prerelease \
-            --title "Lobby, latest build" \
-            --notes "Built from ${{ github.sha }} on branch ${{ github.ref_name }}. Download Lobby.zip, unzip, drag Lobby to Applications. First open: System Settings > Privacy & Security > Open Anyway."
+          # The runner's link to api.github.com sometimes times out; try a few times.
+          for attempt in 1 2 3 4; do
+            gh release delete latest --cleanup-tag --yes || true
+            if gh release create latest Lobby.zip \
+                --prerelease \
+                --title "Lobby, latest build" \
+                --notes "Built from ${{ github.sha }} on branch ${{ github.ref_name }}. Download Lobby.zip, unzip, drag Lobby to Applications. First open: System Settings > Privacy & Security > Open Anyway."; then
+              echo "Published on attempt $attempt"
+              exit 0
+            fi
+            echo "Attempt $attempt didn't get through; trying again in 20 seconds"
+            sleep 20
+          done
+          echo "::error::Couldn't publish the release after four tries"
+          exit 1
 
   functions:
     name: Cloud Functions
