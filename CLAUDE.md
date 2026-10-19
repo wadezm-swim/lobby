@@ -172,18 +172,19 @@ Read `docs/SETUP.md` for how Wade gets it running: browser and Finder only, no X
 ### Built
 
 - **`LobbyCore/`**: plain Swift, no UI, 41 tests, runs on Linux and Mac (`swift test --package-path LobbyCore`). Adelaide time and formatting, sunrise and sunset for day/night, work hours and the Work/Off duty override, meetings and next up, the weekly log timing, the spoiler shield, qualifying picks scoring, the daily three and streak, capture parsing, project matching, sample data, the F1 room's content, and `Cloud.*`: the shapes the functions write to Firestore plus their mapping into the app's models (including the AFL card written for his club: live score, next game, last result, off-season opener).
-- **`Lobby/` + `Lobby.xcodeproj`**: the Mac app, macOS 14+, bundle id `com.wadezm.Lobby`. Home (card order flips with the mode), Work, Sports (11 F1 teams, 18 AFL clubs, shield, picks), menu bar glance, Option+Space concierge. Fleet, Trips and Brand are honest placeholders. Urbanist and Titillium Web bundled (SIL OFL). Firebase: `firebase-ios-sdk` 13.x (FirebaseAuth, FirebaseFirestore). The app reads `GoogleService-Info.plist` from `~/Library/Application Support/Lobby/`, never from the bundle or the repo. With it, a sign-in sheet takes email and password ("Not now" keeps sample data for that launch). Signed in, Firestore listeners lay live data over the sample snapshot one document at a time, and captures upload to `users/{uid}/captures`.
+- **`Lobby/` + `Lobby.xcodeproj`**: the Mac app, macOS 14+, bundle id `com.wadezm.Lobby`. Home (card order flips with the mode), Work, Sports (11 F1 teams, 18 AFL clubs, shield, picks), menu bar glance, Option+Space concierge. Fleet, Trips and Brand are honest placeholders. Urbanist and Titillium Web bundled (SIL OFL). Firebase: `firebase-ios-sdk` 13.x (FirebaseFirestore only). The app reads `GoogleService-Info.plist` from `~/Library/Application Support/Lobby/`, never from the bundle or the repo. With it, Firestore listeners lay live data over the sample snapshot one document at a time, no sign-in needed. Captures queue on the Mac until Phase 2. A launch diary at `~/Library/Application Support/Lobby/launch.log` records each start.
 - **`functions/`**: Cloud Functions in TypeScript, 34 tests on trimmed captures of the real feeds, `npm run smoke` against the live APIs. `sportsTick` every 15 minutes refreshes what's due (Jolpica, Squiggle, six F1 feeds plus AFL.com.au, headlines tagged and flagged for spoilers); `captureToNotion` files captures in his Notion inbox. Region `australia-southeast1`.
 - **GitHub does the building and deploying.** `CI` builds the app on a Mac runner, ad-hoc signs it and publishes `Lobby.zip` at `https://github.com/wadezm-swim/lobby/releases/download/latest/Lobby.zip` on every push. `Deploy cloud` pushes functions and Firestore rules with the repo's secrets and stays quiet until they exist. `Set Notion token` copies `NOTION_TOKEN` into Secret Manager once.
 
 ### Live or sample, once Firebase is on
 
-- **Live:** F1 calendar, countdowns and sessions in Adelaide time, standings and the latest top three (hidden behind the shield), the F1 news wire, the AFL card and news wire, captures to Notion.
+- **Live (as of 19 October, project `lobby-6b45c`, first fetch 06:15 UTC):** F1 calendar, countdowns and sessions in Adelaide time, standings and the latest top three (hidden behind the shield), the F1 news wire, the AFL card and news wire.
+- **Parked until Phase 2 signs the app:** captures to Notion (`captureToNotion` is deployed and waiting).
 - **Still sample:** meetings, top three, waiting on, projects, trips, body, fleet, now playing, the quiz bank. Each waits on its own source: the work calendar route, Notion projects, Gmail, HealthKit (Phase 2), Spotify.
 
 ### Firestore layout the cloud writes
 
-`sports/f1Calendar` (season, weekends with UTC sessions), `sports/f1Standings`, `sports/f1Latest` (race and qualifying top three), `sports/afl` (ladder, live, upcoming, recent, models), `news/f1` and `news/afl` (up to 60 items each with `tags` and `mayContainResult`), `system/sync`. The app writes `users/{uid}/captures/{id}`; the cloud sets its `status` to `sent`, `kept` or `failed`.
+`sports/f1Calendar` (season, weekends with UTC sessions), `sports/f1Standings`, `sports/f1Latest` (race and qualifying top three), `sports/afl` (ladder, live, upcoming, recent, models), `news/f1` and `news/afl` (up to 60 items each with `tags` and `mayContainResult`), `system/sync`. Once signed in (Phase 2) the app writes `users/{uid}/captures/{id}` and the cloud sets its `status` to `sent`, `kept` or `failed`.
 
 ### Secrets the workflows expect
 
@@ -207,8 +208,8 @@ Repo Settings > Secrets and variables > Actions: `FIREBASE_PROJECT_ID`, `FIREBAS
 
 ### Next steps, in order
 
-1. Wade: SETUP.md part 1 (download and open), then part 2 (Firebase, Notion, the five secrets, run the two workflows), then sign in.
-2. Me: read the first Deploy cloud run's log and fix whatever Google throws; a retry is often all the first deploy needs.
+1. Done on 19 October: Firebase project, Blaze (Google's 90-day trial credit applies), Firestore in Sydney, Notion integration, five secrets, both workflows green, first fetch landed. The app runs on Wade's personal Mac with the plist in place.
+2. Wade lives with it for a week and gives feedback.
 3. Work calendar on whichever route IT allows (EventKit is quickest if he subscribes to the work calendar in Apple Calendar). Spotify in the glance. Notion projects into the Work room. Morning top three and the Friday 3pm log as functions (`claude-sonnet-5-5` for the log).
 4. Phase 2 after he's lived with it for a week.
 
