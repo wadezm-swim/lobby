@@ -28,7 +28,8 @@ struct CardGrid: Layout {
         let width = proposal.width ?? (minColumnWidth * 4 + spacing * 3)
         let cols = columns(for: width)
         let heights = rowHeights(subviews, columns: cols, columnWidth: columnWidth(for: width, columns: cols))
-        let height = heights.reduce(0, +) + spacing * CGFloat(max(0, heights.count - 1))
+        let gaps = spacing * CGFloat(max(0, heights.count - 1))
+        let height: CGFloat = heights.reduce(0, +) + gaps
         return CGSize(width: width, height: height)
     }
 
@@ -68,11 +69,21 @@ struct FlowLayout: Layout {
     }
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
-        let width = proposal.width ?? .infinity
-        let laidOut = rows(subviews, width: width)
-        let height = laidOut.map { $0.map(\.size.height).max() ?? 0 }.reduce(0, +) + spacing * CGFloat(max(0, laidOut.count - 1))
-        let used = laidOut.map { row in row.map(\.size.width).reduce(0, +) + spacing * CGFloat(max(0, row.count - 1)) }.max() ?? 0
-        return CGSize(width: proposal.width ?? used, height: height)
+        let laidOut = rows(subviews, width: proposal.width ?? .infinity)
+        var height: CGFloat = 0
+        var widest: CGFloat = 0
+        for (index, row) in laidOut.enumerated() {
+            var rowWidth: CGFloat = 0
+            var rowHeight: CGFloat = 0
+            for item in row {
+                rowWidth += item.size.width
+                rowHeight = max(rowHeight, item.size.height)
+            }
+            rowWidth += spacing * CGFloat(max(0, row.count - 1))
+            widest = max(widest, rowWidth)
+            height += rowHeight + (index > 0 ? spacing : 0)
+        }
+        return CGSize(width: proposal.width ?? widest, height: height)
     }
 
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
