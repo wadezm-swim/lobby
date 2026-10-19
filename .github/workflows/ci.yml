@@ -19,7 +19,7 @@ permissions:
 jobs:
   mac:
     name: Mac app and LobbyCore
-    runs-on: macos-latest
+    runs-on: macos-26
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v5

@@ -8,7 +8,9 @@ struct LobbyApp: App {
     @State private var model = AppModel.shared
 
     init() {
+        LaunchLog.note("starting", fresh: true)
         FontRegistry.registerBundledFonts()
+        LaunchLog.note("fonts registered")
         // Before anything touches Firebase. Quietly does nothing without the config file.
         AppModel.shared.cloud.configure(model: AppModel.shared)
     }
@@ -40,7 +42,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var hotKey: HotKey?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        NSLog("Lobby: finished launching")
+        LaunchLog.note("finished launching")
         let model = AppModel.shared
         model.start()
         hotKey = HotKey(keyCode: UInt32(kVK_Space), modifiers: UInt32(optionKey)) {
@@ -66,7 +68,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     static func openMainWindowIfMissing() {
         let hasWindow = NSApp.windows.contains { $0.isVisible && !($0 is NSPanel) && $0.styleMask.contains(.titled) }
         guard !hasWindow else { return }
-        NSLog("Lobby: main window missing, opening it")
+        LaunchLog.note("main window missing, opening it")
         AppModel.shared.openMainWindow?()
         NSApp.activate()
     }

@@ -46,7 +46,7 @@ struct RootView: View {
         .foregroundStyle(palette.ink)
         .animation(.easeInOut(duration: 0.25), value: model.room)
         .onAppear {
-            NSLog("Lobby: window ready")
+            LaunchLog.note("window ready")
             let openWindow = openWindow
             model.openMainWindow = { openWindow(id: "main") }
         }
