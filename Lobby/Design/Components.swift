@@ -8,8 +8,16 @@ struct CardGrid: Layout {
     var minColumnWidth: CGFloat = 260
     var spacing: CGFloat = 20
 
+    /// SwiftUI probes layouts with zero and infinite widths to find their
+    /// range; infinity must never reach `Int()`, which traps on it.
     private func columns(for width: CGFloat) -> Int {
-        max(1, Int((width + spacing) / (minColumnWidth + spacing)))
+        guard width.isFinite, width > 0 else { return 4 }
+        return max(1, Int((width + spacing) / (minColumnWidth + spacing)))
+    }
+
+    private func usableWidth(_ proposed: CGFloat?) -> CGFloat {
+        if let proposed, proposed.isFinite, proposed > 0 { return proposed }
+        return minColumnWidth * 4 + spacing * 3
     }
 
     private func columnWidth(for width: CGFloat, columns: Int) -> CGFloat {
@@ -25,7 +33,7 @@ struct CardGrid: Layout {
     }
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
-        let width = proposal.width ?? (minColumnWidth * 4 + spacing * 3)
+        let width = usableWidth(proposal.width)
         let cols = columns(for: width)
         let heights = rowHeights(subviews, columns: cols, columnWidth: columnWidth(for: width, columns: cols))
         let gaps = spacing * CGFloat(max(0, heights.count - 1))
@@ -69,7 +77,8 @@ struct FlowLayout: Layout {
     }
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
-        let laidOut = rows(subviews, width: proposal.width ?? .infinity)
+        let proposed = proposal.width
+        let laidOut = rows(subviews, width: proposed ?? .infinity)
         var height: CGFloat = 0
         var widest: CGFloat = 0
         for (index, row) in laidOut.enumerated() {
@@ -83,7 +92,9 @@ struct FlowLayout: Layout {
             widest = max(widest, rowWidth)
             height += rowHeight + (index > 0 ? spacing : 0)
         }
-        return CGSize(width: proposal.width ?? widest, height: height)
+        // Report a real width back when SwiftUI proposed none or infinity.
+        if let proposed, proposed.isFinite { return CGSize(width: proposed, height: height) }
+        return CGSize(width: widest, height: height)
     }
 
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {

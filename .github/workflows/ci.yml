@@ -69,7 +69,7 @@ jobs:
             kill "$PID" || true
             echo "--- app output ---"; cat launch.log
           else
-            wait "$PID"; CODE=$?
+            CODE=0; wait "$PID" || CODE=$?
             echo "::error::Lobby exited with code $CODE within 15 seconds"
             echo "--- app output ---"; cat launch.log
             sleep 5
