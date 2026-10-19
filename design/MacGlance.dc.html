@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lobby menu bar glance</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#D9D9DE}
+a{color:#0E0E0E}
+</style>
+</helmet>
+<div style="width: 400px; height: 720px; box-sizing: border-box; background: #D9D9DE; padding: 14px 16px 18px; font-family: 'Urbanist', system-ui, sans-serif; color: #0E0E0E; font-size: 14px; line-height: 1.4; display: flex; flex-direction: column; gap: 10px">
+  <div style="display: flex; justify-content: flex-end">
+    <span style="display: flex; align-items: center; gap: 8px; background: #0E0E0E; color: #FFFFFF; border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: 600"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #D4FF3F"></span>Menu bar: 10:30 Ops catch-up</span>
+  </div>
+  <div style="flex: 1; background: #ECECEC; border-radius: 26px; padding: 14px; display: flex; flex-direction: column; gap: 10px; overflow: hidden">
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 2px 4px">
+      <span style="font-weight: 800; font-size: 18px">Lobby</span>
+      <span style="background: #0E0E0E; color: #FFFFFF; border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 600">Work</span>
+    </div>
+    <section style="background: #D4FF3F; border-radius: 22px; padding: 16px">
+      <div style="font-weight: 600; font-size: 13px">Next up · in 40 min</div>
+      <div style="font-weight: 700; font-size: 40px; line-height: 1; letter-spacing: -0.03em; margin-top: 6px">10:30</div>
+      <div style="font-weight: 600">Ops catch-up · Boardroom</div>
+    </section>
+    <section style="background: #FFFFFF; border-radius: 22px; padding: 14px; display: flex; flex-direction: column; gap: 8px">
+      <div style="font-weight: 700">Top three</div>
+      <button type="button" aria-pressed="false" style="display: flex; align-items: center; gap: 10px; min-height: 40px; border: 0; background: #F4F4F4; border-radius: 999px; padding: 0 8px; font: 500 14px 'Urbanist', sans-serif; color: #0E0E0E; text-align: left; cursor: pointer"><span aria-hidden="true" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #C9C9CE; flex: none"></span>COTY judges' sheet</button>
+      <button type="button" aria-pressed="false" style="display: flex; align-items: center; gap: 10px; min-height: 40px; border: 0; background: #F4F4F4; border-radius: 999px; padding: 0 8px; font: 500 14px 'Urbanist', sans-serif; color: #0E0E0E; text-align: left; cursor: pointer"><span aria-hidden="true" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #C9C9CE; flex: none"></span>Olly Timing install quote</button>
+    </section>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+      <section style="background: #0E0E0E; color: #FFFFFF; border-radius: 20px; padding: 12px"><div style="font-size: 12px; color: #B5B5BA">US GP practice</div><div style="font-weight: 700; font-size: 20px">4d 18h</div></section>
+      <section style="background: #FFFFFF; border-radius: 20px; padding: 12px"><div style="font-size: 12px; color: #5F5F64">Waiting on</div><div style="font-weight: 700; font-size: 20px">2</div></section>
+    </div>
+    <section aria-label="Now playing on Spotify" style="background: #FFFFFF; border-radius: 20px; padding: 10px 12px; display: flex; align-items: center; gap: 10px">
+      <span aria-hidden="true" style="width: 40px; height: 40px; border-radius: 12px; background: #CDF5DC; flex: none"></span>
+      <div style="flex: 1; min-width: 0"><div style="font-size: 12px; color: #5F5F64">Now playing · Spotify</div><div style="font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">[Track or podcast]</div></div>
+      <button type="button" aria-label="Pause" style="width: 36px; height: 36px; border-radius: 50%; border: 0; background: #0E0E0E; color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer; flex: none"><svg width="14" height="14" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
+    </section>
+    <label for="glancecap" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Capture</label>
+    <input id="glancecap" type="text" placeholder="Capture, then press Return" style="margin-top: auto; min-height: 44px; box-sizing: border-box; border: 0; border-radius: 999px; background: #FFFFFF; padding: 0 16px; font: 500 14px 'Urbanist', sans-serif; color: #0E0E0E">
+    <a href="Main.dc.html" style="text-align: center; font-size: 13px; font-weight: 600">Open Lobby</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":400,"height":720}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

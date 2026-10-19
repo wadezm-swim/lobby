@@ -1,0 +1,206 @@
+{
+  "v": 3,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-19T01:20:00Z"
+  },
+  "title": "Lobby Design",
+  "launch": {
+    "view": "canvas"
+  },
+  "pages": [],
+  "boards": {
+    "Main.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 900,
+      "title": "Mac \u00b7 Home",
+      "expand": "fill"
+    },
+    "MacWork.dc.html": {
+      "x": 1520,
+      "y": 0,
+      "w": 1440,
+      "h": 900,
+      "title": "Mac \u00b7 Work",
+      "expand": "fill"
+    },
+    "MacF1.dc.html": {
+      "x": 3040,
+      "y": 0,
+      "w": 1440,
+      "h": 1000,
+      "title": "Mac \u00b7 Sports (F1 and AFL)",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "MacFleet.dc.html": {
+      "x": 4560,
+      "y": 0,
+      "w": 1440,
+      "h": 1000,
+      "title": "Mac \u00b7 Fleet (Qantas plus wildcard airlines)",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "MacTrips.dc.html": {
+      "x": 6080,
+      "y": 0,
+      "w": 1440,
+      "h": 1000,
+      "title": "Mac \u00b7 Trips (drag ideas onto days)",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "MacBrand.dc.html": {
+      "x": 7600,
+      "y": 0,
+      "w": 1440,
+      "h": 1600,
+      "title": "Mac \u00b7 Brand (Tim Duggan features, habits, goals)",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "MacGlance.dc.html": {
+      "x": 0,
+      "y": 1360,
+      "w": 400,
+      "h": 720,
+      "title": "Mac \u00b7 Menu bar glance (with Spotify)"
+    },
+    "MacConcierge.dc.html": {
+      "x": 480,
+      "y": 1360,
+      "w": 720,
+      "h": 460,
+      "title": "Mac \u00b7 Concierge (Option+Space)",
+      "is_interactive": true
+    },
+    "PhoneHome.dc.html": {
+      "x": 0,
+      "y": 2420,
+      "w": 390,
+      "h": 844,
+      "title": "iPhone \u00b7 Home, day"
+    },
+    "PhoneNight.dc.html": {
+      "x": 470,
+      "y": 2420,
+      "w": 390,
+      "h": 844,
+      "title": "iPhone \u00b7 Home, night"
+    },
+    "PhoneSports.dc.html": {
+      "x": 940,
+      "y": 2420,
+      "w": 390,
+      "h": 844,
+      "title": "iPhone \u00b7 Sports"
+    },
+    "PhoneFleet.dc.html": {
+      "x": 1410,
+      "y": 2420,
+      "w": 390,
+      "h": 844,
+      "title": "iPhone \u00b7 Fleet"
+    },
+    "PhoneTrips.dc.html": {
+      "x": 1880,
+      "y": 2420,
+      "w": 390,
+      "h": 844,
+      "title": "iPhone \u00b7 Trips"
+    },
+    "MacIdeasLab.dc.html": {
+      "x": 9120,
+      "y": 0,
+      "w": 1440,
+      "h": 1000,
+      "title": "Mac \u00b7 Ideas lab (K.I.L.L.E.R. check)",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "PhoneBrand.dc.html": {
+      "x": 2350,
+      "y": 2420,
+      "w": 390,
+      "h": 844,
+      "title": "iPhone \u00b7 Brand"
+    },
+    "PhoneToday.dc.html": {
+      "x": 2820,
+      "y": 2420,
+      "w": 390,
+      "h": 844,
+      "title": "iPhone \u00b7 Today away (trip day)"
+    },
+    "PhoneLock.dc.html": {
+      "x": 3290,
+      "y": 2420,
+      "w": 390,
+      "h": 844,
+      "title": "iPhone \u00b7 Lock screen and Live Activities",
+      "is_interactive": true
+    },
+    "iPadHome.dc.html": {
+      "x": 0,
+      "y": 3560,
+      "w": 1180,
+      "h": 820,
+      "title": "iPad \u00b7 Home",
+      "is_interactive": true
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "MacWork.dc.html",
+    "MacF1.dc.html",
+    "MacFleet.dc.html",
+    "MacTrips.dc.html",
+    "MacBrand.dc.html",
+    "MacIdeasLab.dc.html",
+    "MacGlance.dc.html",
+    "MacConcierge.dc.html",
+    "PhoneHome.dc.html",
+    "PhoneNight.dc.html",
+    "PhoneSports.dc.html",
+    "PhoneFleet.dc.html",
+    "PhoneTrips.dc.html",
+    "PhoneBrand.dc.html",
+    "PhoneToday.dc.html",
+    "PhoneLock.dc.html",
+    "iPadHome.dc.html"
+  ],
+  "notes": {
+    "rowmac": {
+      "x": 0,
+      "y": -300,
+      "text": "Mac: Home, Work, Sports, Fleet, Trips, Brand, Ideas lab",
+      "kind": "title1",
+      "maxW": 10560
+    },
+    "rowalways": {
+      "x": 0,
+      "y": 1080,
+      "text": "Mac: always on",
+      "kind": "title1",
+      "maxW": 1200
+    },
+    "rowphone": {
+      "x": 0,
+      "y": 2140,
+      "text": "iPhone",
+      "kind": "title1",
+      "maxW": 3680
+    },
+    "rowipad": {
+      "x": 0,
+      "y": 3280,
+      "text": "iPad",
+      "kind": "title1",
+      "maxW": 1180
+    }
+  },
+  "designSystems": []
+}

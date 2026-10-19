@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lobby Mac ideas lab</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#ECECEC}
+a{color:#0E0E0E}a:hover{color:#444444}
+</style>
+</helmet>
+<div style="min-height: 1000px; box-sizing: border-box; background: #ECECEC; color: #0E0E0E; font-family: 'Urbanist', system-ui, sans-serif; font-size: 15px; line-height: 1.45; padding: 20px; display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
+
+  <nav aria-label="Rooms" style="flex: 0 0 84px; background: #FFFFFF; border-radius: 28px; padding: 18px 0; display: flex; flex-direction: column; align-items: center; gap: 10px">
+    <div aria-hidden="true" style="width: 48px; height: 48px; border-radius: 50%; background: #0E0E0E; color: #D4FF3F; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px; margin-bottom: 12px">L</div>
+    <a href="Main.dc.html" aria-label="Home" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></a>
+    <a href="MacWork.dc.html" aria-label="Work" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></a>
+    <a href="MacF1.dc.html" aria-label="Sports" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4h12l-2 4 2 4H5"/></svg></a>
+    <a href="MacFleet.dc.html" aria-label="Fleet" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16l20-6-4-2-6 2-6-5-2 1 4 6-5 2-2-1-1 1z"/></svg></a>
+    <a href="MacTrips.dc.html" aria-label="Trips" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M9 7V4h6v3"/></svg></a>
+    <a href="MacBrand.dc.html" aria-label="Brand" style="width: 48px; height: 48px; border-radius: 50%; background: #D4FF3F; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E0E0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg></a>
+  </nav>
+
+  <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+    <header style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; justify-content: space-between; padding: 8px 6px 0">
+      <div>
+        <a href="MacBrand.dc.html" style="display: inline-flex; align-items: center; gap: 6px; min-height: 32px; font-size: 14px; font-weight: 600; color: #5F5F64; text-decoration: none">← Brand</a>
+        <h1 style="margin: 2px 0 0; font-weight: 700; font-size: 44px; line-height: 1.05; letter-spacing: -0.02em">Ideas lab</h1>
+        <div style="font-size: 15px; color: #5F5F64; margin-top: 6px">Every idea you capture lands here. Claude checks it, you decide.</div>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap">
+        <span style="background: #FFFFFF; border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 600">{{ countText }}</span>
+        <span style="background: #0E0E0E; color: #FFFFFF; border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 600">From Killer Thinking, Tim Duggan</span>
+      </div>
+    </header>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+      <section aria-label="Ideas" style="flex: 1 1 340px; max-width: 420px; background: #FFFFFF; border-radius: 28px; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 4px 6px"><span style="font-weight: 700; font-size: 18px">Captured</span><span style="font-size: 12px; color: #5F5F64">Option+Space, voice or Notion</span></div>
+        <sc-for list="{{ ideas }}" as="i" hint-placeholder-count="4">
+          <button type="button" onClick="{{ i.pick }}" aria-pressed="{{ i.pressed }}" style="{{ i.style }}">
+            <span style="display: block; font-weight: 700; font-size: 16px; line-height: 1.25">{{ i.title }}</span>
+            <span style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; align-items: center">
+              <span style="{{ i.sourceStyle }}">{{ i.source }}</span>
+              <span style="{{ i.scoreStyle }}">{{ i.scoreText }}</span>
+              <sc-if value="{{ i.isParked }}" hint-placeholder-val="{{ false }}"><span style="background: #E4E4E4; color: #5F5F64; border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700">Parked</span></sc-if>
+              <sc-if value="{{ i.isAdded }}" hint-placeholder-val="{{ false }}"><span style="background: #D4FF3F; border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700">In Notion</span></sc-if>
+            </span>
+          </button>
+        </sc-for>
+      </section>
+
+      <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <section aria-label="Step 1" style="background: #FFFFFF; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap">
+            <div style="display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="width: 32px; height: 32px; border-radius: 50%; background: #0E0E0E; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700">1</span><span style="font-weight: 700; font-size: 20px">Be your problem's therapist</span></div>
+            <span style="font-size: 12px; color: #5F5F64; border: 1px dashed #B9B9BE; border-radius: 999px; padding: 4px 10px">Drafted by Claude · tap to edit</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px">
+            <div style="background: #F4F4F4; border-radius: 20px; padding: 14px 16px"><div style="font-size: 12px; font-weight: 600; color: #5F5F64">The problem</div><div style="font-weight: 600; margin-top: 4px">{{ sel.problem }}</div></div>
+            <div style="background: #F4F4F4; border-radius: 20px; padding: 14px 16px"><div style="font-size: 12px; font-weight: 600; color: #5F5F64">Who has it</div><div style="font-weight: 600; margin-top: 4px">{{ sel.who }}</div></div>
+            <div style="background: #F4F4F4; border-radius: 20px; padding: 14px 16px"><div style="font-size: 12px; font-weight: 600; color: #5F5F64">Solved when</div><div style="font-weight: 600; margin-top: 4px">{{ sel.solved }}</div></div>
+          </div>
+        </section>
+
+        <section aria-label="Step 2" style="background: #FFFFFF; border-radius: 28px; padding: 24px; display: flex; flex-wrap: wrap; gap: 20px">
+          <div style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="width: 32px; height: 32px; border-radius: 50%; background: #0E0E0E; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700">2</span><span style="font-weight: 700; font-size: 20px">K.I.L.L.E.R. check</span></div>
+            <div style="background: #D4FF3F; border-radius: 24px; padding: 18px 20px; margin-top: 6px">
+              <div style="font-weight: 800; font-size: 56px; line-height: 1; letter-spacing: -0.04em">{{ sel.score }}<span style="font-size: 24px; font-weight: 700; letter-spacing: 0"> of 6</span></div>
+              <div style="font-weight: 600; margin-top: 6px">{{ sel.verdict }}</div>
+            </div>
+          </div>
+          <div style="flex: 3 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+            <sc-for list="{{ sel.checks }}" as="k" hint-placeholder-count="6">
+              <div style="display: grid; grid-template-columns: 110px 82px 1fr; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px solid #F1F1F1">
+                <span style="font-weight: 700">{{ k.name }}</span>
+                <span style="{{ k.pillStyle }}">{{ k.label }}</span>
+                <span style="font-size: 14px; color: #3A3A3E">{{ k.reason }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <section aria-label="Step 3" style="background: #0E0E0E; color: #FFFFFF; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 14px; position: relative; overflow: hidden">
+          <div aria-hidden="true" style="position: absolute; width: 280px; height: 280px; right: -80px; top: -160px; border-radius: 50%; background: #D4FF3F; filter: blur(90px); opacity: 0.3"></div>
+          <div style="position: relative; display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="width: 32px; height: 32px; border-radius: 50%; background: #FFFFFF; color: #0E0E0E; display: flex; align-items: center; justify-content: center; font-weight: 700">3</span><span style="font-weight: 700; font-size: 20px">Next step</span></div>
+          <div style="position: relative; font-weight: 600; font-size: 22px; line-height: 1.25; max-width: 760px">{{ sel.next }}</div>
+          <div style="position: relative; display: flex; gap: 10px; flex-wrap: wrap; align-items: center">
+            <sc-if value="{{ sel.showButtons }}" hint-placeholder-val="{{ true }}">
+              <button type="button" onClick="{{ addToNotion }}" style="min-height: 44px; padding: 0 20px; border: 0; border-radius: 999px; background: #D4FF3F; color: #0E0E0E; font: 700 15px 'Urbanist', sans-serif; cursor: pointer">Make it a Notion project</button>
+              <button type="button" onClick="{{ park }}" style="min-height: 44px; padding: 0 20px; border: 1.5px solid #4A4A4E; border-radius: 999px; background: transparent; color: #FFFFFF; font: 600 15px 'Urbanist', sans-serif; cursor: pointer">Park it</button>
+            </sc-if>
+            <sc-if value="{{ sel.isAdded }}" hint-placeholder-val="{{ false }}">
+              <span role="status" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 999px; background: #D4FF3F; color: #0E0E0E; font-weight: 700">✓ Added to Notion · Projects</span>
+              <button type="button" onClick="{{ undo }}" style="min-height: 44px; padding: 0 16px; border: 0; background: transparent; color: #B5B5BA; font: 600 14px 'Urbanist', sans-serif; cursor: pointer; text-decoration: underline">Undo</button>
+            </sc-if>
+            <sc-if value="{{ sel.isParked }}" hint-placeholder-val="{{ false }}">
+              <span role="status" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; background: #2A2A2A; color: #FFFFFF; font-weight: 600">Parked. Lobby brings it back in 3 months.</span>
+              <button type="button" onClick="{{ undo }}" style="min-height: 44px; padding: 0 16px; border: 0; background: transparent; color: #B5B5BA; font: 600 14px 'Urbanist', sans-serif; cursor: pointer; text-decoration: underline">Undo</button>
+            </sc-if>
+          </div>
+        </section>
+
+        <div style="font-size: 13px; color: #5F5F64; padding: 0 6px">Scored by Claude. You always make the call. Sample data.</div>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { picked: 'splits', status: {} };
+  }
+  renderVals() {
+    const ideas = [
+      {
+        id: 'splits', title: 'Live split screens on pool deck for parents', source: 'Option+Space',
+        problem: 'Parents in the stands can’t see splits until results post, often an hour later.',
+        who: 'Parents and coaches at every SwimmingSA meet',
+        solved: 'Splits show within 30 seconds of the touch, with no extra volunteers',
+        checks: [
+          ['Kind', 'pass', 'Helps parents follow their kid without hassling officials'],
+          ['Impactful', 'pass', 'Answers a question parents ask at every meet'],
+          ['Loved', 'pass', 'Parents film screens and share them, so it spreads itself'],
+          ['Lasting', 'pass', 'Runs off the permanent Olly Timing install'],
+          ['Easy', 'maybe', 'Needs a screen and AV help from the venue'],
+          ['Repeatable', 'pass', 'Same setup every meet once it’s in']
+        ],
+        next: 'Ask the venue AV contact what a pool deck screen would take, before the next Next Stop meet.'
+      },
+      {
+        id: 'reel', title: 'Volunteer of the meet shout-out reel', source: 'Voice note',
+        problem: 'Volunteers give whole weekends and rarely get thanked in public.',
+        who: 'Wave Makers volunteers and technical officials',
+        solved: 'Every meet ends with one named, shared thank-you',
+        checks: [
+          ['Kind', 'pass', 'Pure recognition, nothing asked in return'],
+          ['Impactful', 'maybe', 'Lifts morale, but hard to prove on retention yet'],
+          ['Loved', 'pass', 'People share posts about themselves and their friends'],
+          ['Lasting', 'maybe', 'Only lasts if someone owns it every meet'],
+          ['Easy', 'pass', 'One photo and two lines, drafted in your voice'],
+          ['Repeatable', 'pass', 'Fits every meet on the calendar']
+        ],
+        next: 'Pick one volunteer at the next meet and draft the first post in your voice.'
+      },
+      {
+        id: 'lobby', title: 'Barefoot Luxury: hotel lobby series', source: 'Notion',
+        problem: 'Barefoot Luxury posts are beautiful but don’t have a recurring hook.',
+        who: 'You, and followers who save travel ideas',
+        solved: 'A named series people come back for, posted on a steady rhythm',
+        checks: [
+          ['Kind', 'pass', 'Credits the designers and properties you feature'],
+          ['Impactful', 'maybe', 'Builds the account more than it changes anything'],
+          ['Loved', 'pass', 'Lobbies are your thing, and it shows'],
+          ['Lasting', 'pass', 'Endless supply, every trip adds more'],
+          ['Easy', 'pass', 'Uses photos you already take'],
+          ['Repeatable', 'miss', 'Depends on travel, so there are gaps between trips']
+        ],
+        next: 'Draft five lobby posts from photos you already have, so the series starts with a buffer.'
+      },
+      {
+        id: 'next', title: '[Your next idea]', source: 'Option+Space',
+        problem: '[What’s actually going wrong, in one line]',
+        who: '[Who feels it]',
+        solved: '[How you’d know it worked]',
+        checks: [
+          ['Kind', 'miss', '[Waiting for Claude]'],
+          ['Impactful', 'miss', '[Waiting for Claude]'],
+          ['Loved', 'miss', '[Waiting for Claude]'],
+          ['Lasting', 'miss', '[Waiting for Claude]'],
+          ['Easy', 'miss', '[Waiting for Claude]'],
+          ['Repeatable', 'miss', '[Waiting for Claude]']
+        ],
+        next: 'Capture an idea with Option+Space and it gets checked here.'
+      }
+    ];
+    const pillStyles = {
+      pass: 'background: #CDF5DC; color: #0E5A2C;',
+      maybe: 'background: #FFE1CC; color: #7A3B0C;',
+      miss: 'background: #EFEFEF; color: #5F5F64;'
+    };
+    const labels = { pass: 'Pass', maybe: 'Maybe', miss: 'Miss' };
+    const verdicts = (s) => s >= 5 ? 'Killer. Worth building.' : s >= 3 ? 'Promising. Fix the maybes first.' : 'Not there yet.';
+    const status = this.state.status;
+    const list = ideas.map((i) => {
+      const score = i.checks.filter((c) => c[1] === 'pass').length;
+      const on = i.id === this.state.picked;
+      const st = status[i.id] || '';
+      return {
+        ...i,
+        score,
+        pressed: on ? 'true' : 'false',
+        isParked: st === 'parked',
+        isAdded: st === 'added',
+        scoreText: score + ' of 6',
+        pick: () => this.setState({ picked: i.id }),
+        style: 'display: block; width: 100%; text-align: left; border: 0; border-radius: 22px; padding: 14px 16px; cursor: pointer; font-family: inherit; color: #0E0E0E; ' + (on ? 'background: #0E0E0E; color: #FFFFFF;' : 'background: #F4F4F4;') + (st === 'parked' ? ' opacity: 0.6;' : ''),
+        sourceStyle: 'border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 600; ' + (on ? 'background: #2A2A2A; color: #D9D9DE;' : 'background: #FFFFFF; color: #5F5F64;'),
+        scoreStyle: 'border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700; ' + (score >= 5 ? 'background: #D4FF3F; color: #0E0E0E;' : on ? 'background: #FFFFFF; color: #0E0E0E;' : 'background: #E4E4E4; color: #0E0E0E;')
+      };
+    });
+    const cur = list.find((i) => i.id === this.state.picked) || list[0];
+    const st = status[cur.id] || '';
+    const setSt = (v) => this.setState({ status: { ...status, [cur.id]: v } });
+    const active = list.filter((i) => !i.isParked).length;
+    return {
+      ideas: list,
+      countText: active + ' ideas live · ' + list.filter((i) => i.isParked).length + ' parked',
+      sel: {
+        problem: cur.problem,
+        who: cur.who,
+        solved: cur.solved,
+        score: cur.score,
+        verdict: cur.id === 'next' ? 'Nothing to check yet.' : verdicts(cur.score),
+        next: cur.next,
+        checks: cur.checks.map((c) => ({ name: c[0], label: labels[c[1]], reason: c[2], pillStyle: 'display: inline-flex; justify-content: center; border-radius: 999px; padding: 4px 10px; font-size: 12px; font-weight: 700; ' + pillStyles[c[1]] })),
+        showButtons: st === '',
+        isAdded: st === 'added',
+        isParked: st === 'parked'
+      },
+      addToNotion: () => setSt('added'),
+      park: () => setSt('parked'),
+      undo: () => setSt('')
+    };
+  }
+}
+</script>
+</body>
+</html>

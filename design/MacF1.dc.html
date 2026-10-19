@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lobby Mac sports room</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&amp;family=Titillium+Web:ital,wght@0,600;0,700;0,900;1,900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#000000}
+a{color:#F5F5F5}a:hover{color:#FFFFFF}
+select{font:600 14px Urbanist,sans-serif}
+</style>
+</helmet>
+<div style="min-height: 1000px; box-sizing: border-box; background: #000000; color: #F5F5F5; font-family: 'Urbanist', system-ui, sans-serif; font-size: 15px; line-height: 1.45; padding: 20px; display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
+
+  <nav aria-label="Rooms" style="flex: 0 0 84px; background: #141414; border-radius: 28px; padding: 18px 0; display: flex; flex-direction: column; align-items: center; gap: 10px">
+    <div aria-hidden="true" style="width: 48px; height: 48px; border-radius: 50%; background: #F5F5F5; color: #0E0E0E; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px; margin-bottom: 12px">L</div>
+    <a href="Main.dc.html" aria-label="Home" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9B9B9F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></a>
+    <a href="MacWork.dc.html" aria-label="Work" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9B9B9F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></a>
+    <a href="MacF1.dc.html" aria-label="Sports" style="width: 48px; height: 48px; border-radius: 50%; background: #F5F5F5; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E0E0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4h12l-2 4 2 4H5"/></svg></a>
+    <a href="MacFleet.dc.html" aria-label="Fleet" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9B9B9F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16l20-6-4-2-6 2-6-5-2 1 4 6-5 2-2-1-1 1z"/></svg></a>
+    <a href="MacTrips.dc.html" aria-label="Trips" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9B9B9F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M9 7V4h6v3"/></svg></a>
+    <a href="MacBrand.dc.html" aria-label="Brand" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9B9B9F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg></a>
+  </nav>
+
+  <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+    <header style="display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; padding: 8px 6px 0">
+      <h1 style="margin: 0; font-weight: 700; font-size: 44px; line-height: 1.05; letter-spacing: -0.02em">Sports</h1>
+      <div role="group" aria-label="Sport" style="display: flex; background: #141414; border-radius: 999px; padding: 4px; gap: 4px">
+        <button type="button" onClick="{{ pickF1 }}" style="{{ f1TabStyle }}">F1</button>
+        <button type="button" onClick="{{ pickAfl }}" style="{{ aflTabStyle }}">AFL</button>
+      </div>
+    </header>
+
+    <sc-if value="{{ isF1 }}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; flex-direction: column; gap: 18px">
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between">
+          <div role="group" aria-label="Choose your team" style="display: flex; flex-wrap: wrap; gap: 8px">
+            <sc-for list="{{ teams }}" as="t" hint-placeholder-count="11">
+              <button type="button" onClick="{{ t.pick }}" aria-pressed="{{ t.pressed }}" style="{{ t.chipStyle }}"><span style="{{ t.dotStyle }}"></span>{{ t.name }}</button>
+            </sc-for>
+          </div>
+          <div role="group" aria-label="Preview season mode" style="display: flex; background: #141414; border-radius: 999px; padding: 4px; gap: 4px">
+            <button type="button" onClick="{{ pickRace }}" style="{{ raceModeStyle }}">Race week</button>
+            <button type="button" onClick="{{ pickOff }}" style="{{ offModeStyle }}">Off-season</button>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 18px; align-items: stretch">
+          <section style="flex: 999 1 520px; min-width: 0; position: relative; overflow: hidden; background: #111111; border-radius: 28px; padding: 30px 34px; display: flex; flex-direction: column; gap: 16px; min-height: 340px">
+            <div aria-hidden="true" style="position: absolute; left: 10px; bottom: -30px; font-family: 'Titillium Web', sans-serif; font-weight: 900; font-style: italic; font-size: 180px; line-height: 1; color: #1A1A1A">{{ watermark }}</div>
+            <div aria-hidden="true" style="{{ glowStyle }}"></div>
+            <div style="position: relative; display: flex; align-items: center; gap: 12px">
+              <span style="background: #E10600; color: #FFFFFF; font-family: 'Titillium Web', sans-serif; font-weight: 900; font-style: italic; font-size: 18px; line-height: 1; padding: 6px 16px 6px 12px; clip-path: polygon(0 0, 100% 0, 86% 100%, 0 100%)">F1</span>
+              <span style="font-family: 'Titillium Web', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; font-size: 14px; color: #B5B5BA">{{ heroLabel }}</span>
+            </div>
+            <div style="position: relative; margin-top: auto">
+              <div style="font-size: 14px; color: #9B9B9F">{{ countLabel }}</div>
+              <div style="{{ countStyle }}">{{ countValue }}</div>
+              <div style="font-size: 13px; color: #9B9B9F">{{ countSub }}</div>
+            </div>
+          </section>
+          <section aria-label="Your team" style="flex: 1 1 300px; min-width: 0; background: #111111; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+            <div style="{{ teamBarStyle }}"></div>
+            <div><div style="font-size: 13px; color: #9B9B9F">Your team</div><div style="font-family: 'Titillium Web', sans-serif; font-weight: 900; font-size: 30px; line-height: 1.05; text-transform: uppercase">{{ sel.name }}</div></div>
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+              <div style="background: #1A1A1A; border-radius: 18px; padding: 12px 14px"><div style="font-family: 'Titillium Web', sans-serif; font-weight: 700; font-size: 18px">{{ sel.d1 }}</div><div style="font-size: 12px; color: #9B9B9F">P[n] · [pts] pts</div></div>
+              <div style="background: #1A1A1A; border-radius: 18px; padding: 12px 14px"><div style="font-family: 'Titillium Web', sans-serif; font-weight: 700; font-size: 18px">{{ sel.d2 }}</div><div style="font-size: 12px; color: #9B9B9F">P[n] · [pts] pts</div></div>
+            </div>
+            <div style="font-size: 13px; color: #9B9B9F; margin-top: auto">{{ teamNote }}</div>
+          </section>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px">
+          <section style="background: #111111; border-radius: 28px; padding: 22px">
+            <div style="font-weight: 700; font-size: 18px; margin-bottom: 8px">{{ panelTitle }}</div>
+            <sc-for list="{{ panelRows }}" as="r" hint-placeholder-count="3">
+              <div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid #222222"><span style="color: #B5B5BA">{{ r.a }}</span><span style="font-family: 'Titillium Web', sans-serif; font-weight: 700; text-align: right">{{ r.b }}</span></div>
+            </sc-for>
+          </section>
+          <section style="background: #111111; border-radius: 28px; padding: 22px">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px"><span style="font-weight: 700; font-size: 18px">News wire</span><span style="font-size: 12px; color: #9B9B9F">your team first</span></div>
+            <sc-for list="{{ news }}" as="n" hint-placeholder-count="4">
+              <div style="padding: 10px 0; border-top: 1px solid #222222"><div style="font-size: 12px; color: #9B9B9F">{{ n.source }}</div><div style="font-weight: 600">{{ n.title }}</div></div>
+            </sc-for>
+          </section>
+          <section aria-label="Spoiler shield" style="background: #111111; border-radius: 28px; padding: 22px; display: flex; flex-direction: column; gap: 10px; border: 1.5px dashed #3A3A3A">
+            <div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-weight: 700; font-size: 18px">Spoiler shield</span><span style="font-size: 12px; color: #9B9B9F">{{ shieldTag }}</span></div>
+            <sc-if value="{{ shieldOn }}" hint-placeholder-val="{{ true }}">
+              <div style="font-family: 'Titillium Web', sans-serif; font-weight: 700; font-size: 22px; line-height: 1.15">[Last GP] result hidden</div>
+              <div style="font-size: 13px; color: #B5B5BA">Hidden across Lobby: results, standings, widgets, notifications and 3 headlines in the news wire.</div>
+              <button type="button" onClick="{{ markWatched }}" style="align-self: flex-start; min-height: 44px; padding: 0 18px; border: 0; border-radius: 999px; background: #F5F5F5; color: #0E0E0E; font: 700 14px 'Urbanist', sans-serif; cursor: pointer">I've watched it</button>
+            </sc-if>
+            <sc-if value="{{ shieldOff }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; justify-content: space-between; padding: 6px 0; border-top: 1px solid #222222"><span style="color: #B5B5BA">P1</span><span style="font-family: 'Titillium Web', sans-serif; font-weight: 700">[Winner]</span></div>
+              <div style="display: flex; justify-content: space-between; padding: 6px 0; border-top: 1px solid #222222"><span style="color: #B5B5BA">Your team</span><span style="font-family: 'Titillium Web', sans-serif; font-weight: 700">P[n] and P[n]</span></div>
+              <div style="font-size: 13px; color: #B5B5BA">Standings and headlines are back.</div>
+              <button type="button" onClick="{{ hideAgain }}" style="align-self: flex-start; min-height: 40px; padding: 0 16px; border: 1.5px solid #3A3A3A; border-radius: 999px; background: transparent; color: #F5F5F5; font: 600 13px 'Urbanist', sans-serif; cursor: pointer">Hide again</button>
+            </sc-if>
+          </section>
+          <section aria-label="Your qualifying picks" style="background: #111111; border-radius: 28px; padding: 22px; display: flex; flex-direction: column; gap: 6px">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px"><span style="font-weight: 700; font-size: 18px">Your qualifying picks</span><span style="font-size: 12px; color: #9B9B9F">locks at Q1</span></div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid #222222"><span style="color: #B5B5BA">P1</span><span style="font-family: 'Titillium Web', sans-serif; font-weight: 700">Norris</span></div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid #222222"><span style="color: #B5B5BA">P2</span><span style="font-family: 'Titillium Web', sans-serif; font-weight: 700">[Your pick]</span></div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid #222222"><span style="color: #B5B5BA">P3</span><span style="font-family: 'Titillium Web', sans-serif; font-weight: 700">Piastri</span></div>
+            <div style="font-size: 13px; color: #9B9B9F">Season score [n] pts · scored once the spoiler shield comes down</div>
+          </section>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isAfl }}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 18px">
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center">
+          <label for="club" style="font-size: 14px; color: #B5B5BA">Your club</label>
+          <select id="club" style="min-height: 44px; border-radius: 999px; border: 1.5px solid #00A9C5; background: #141414; color: #F5F5F5; padding: 0 16px">
+            <option>Port Adelaide</option><option>Adelaide</option><option>Brisbane</option><option>Carlton</option><option>Collingwood</option><option>Essendon</option><option>Fremantle</option><option>Geelong</option><option>Gold Coast</option><option>GWS</option><option>Hawthorn</option><option>Melbourne</option><option>North Melbourne</option><option>Richmond</option><option>St Kilda</option><option>Sydney</option><option>West Coast</option><option>Western Bulldogs</option>
+          </select>
+          <span style="font-size: 13px; color: #9B9B9F">Club colours approximate · sample data</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 18px; align-items: stretch">
+          <section style="flex: 999 1 520px; min-width: 0; position: relative; overflow: hidden; background: #111111; border-radius: 28px; padding: 30px 34px; display: flex; flex-direction: column; gap: 14px; min-height: 340px">
+            <div aria-hidden="true" style="position: absolute; left: 10px; bottom: -30px; font-weight: 800; font-size: 170px; line-height: 1; color: #161616; letter-spacing: -0.04em">POWER</div>
+            <div aria-hidden="true" style="position: absolute; width: 440px; height: 440px; right: -120px; top: -180px; border-radius: 50%; background: #00A9C5; filter: blur(110px); opacity: 0.45"></div>
+            <div style="position: relative; display: flex; align-items: center; gap: 12px">
+              <span style="background: #00A9C5; color: #000000; font-weight: 800; font-size: 14px; border-radius: 999px; padding: 6px 12px">AFL</span>
+              <span style="font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; font-size: 14px; color: #B5B5BA">Port Adelaide · off-season</span>
+            </div>
+            <div style="position: relative; margin-top: auto">
+              <div style="font-size: 14px; color: #9B9B9F">Trade period and draft</div>
+              <div style="font-weight: 800; font-size: 64px; line-height: 1; letter-spacing: -0.03em">Draft in [n] days</div>
+              <div style="font-size: 13px; color: #9B9B9F">Then: fixture release [date] · Round 1 [date]</div>
+            </div>
+          </section>
+          <section style="flex: 1 1 300px; min-width: 0; background: #111111; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+            <div style="height: 6px; border-radius: 999px; background: #00A9C5"></div>
+            <div><div style="font-size: 13px; color: #9B9B9F">Your club</div><div style="font-weight: 800; font-size: 30px; line-height: 1.05">Port Adelaide</div></div>
+            <div style="display: flex; justify-content: space-between"><span style="color: #B5B5BA">Finished 2026</span><span style="font-weight: 700">[ladder position]</span></div>
+            <div style="display: flex; justify-content: space-between"><span style="color: #B5B5BA">Ins and outs</span><span style="font-weight: 700">[from trade news]</span></div>
+            <div style="font-size: 13px; color: #9B9B9F; margin-top: auto">In season this becomes next game, live score and ladder.</div>
+          </section>
+        </div>
+        <section style="background: #111111; border-radius: 28px; padding: 22px">
+          <div style="font-weight: 700; font-size: 18px; margin-bottom: 8px">News wire</div>
+          <div style="padding: 10px 0; border-top: 1px solid #222222"><div style="font-size: 12px; color: #9B9B9F">Port Adelaide FC</div><div style="font-weight: 600">[Latest club headline]</div></div>
+          <div style="padding: 10px 0; border-top: 1px solid #222222"><div style="font-size: 12px; color: #9B9B9F">AFL.com.au · trades</div><div style="font-weight: 600">[Latest trade headline]</div></div>
+          <div style="padding: 10px 0; border-top: 1px solid #222222"><div style="font-size: 12px; color: #9B9B9F">Draft watch</div><div style="font-weight: 600">[Latest draft headline]</div></div>
+        </section>
+        <section aria-label="Beat the models" style="position: relative; overflow: hidden; background: #0B3B44; border-radius: 28px; padding: 22px 26px; display: flex; flex-wrap: wrap; gap: 20px 32px; justify-content: space-between; align-items: center">
+          <div style="flex: 1 1 280px; min-width: 0"><div style="font-weight: 700; font-size: 18px">Beat the models</div><div style="font-size: 14px; color: #CFE9EE">Tip each round. Lobby scores you against Squiggle's computer tipsters.</div></div>
+          <div style="display: flex; gap: 28px">
+            <div><div style="font-weight: 800; font-size: 32px; line-height: 1">[n]/[n]</div><div style="font-size: 12px; color: #CFE9EE">your tips</div></div>
+            <div><div style="font-weight: 800; font-size: 32px; line-height: 1">[n]/[n]</div><div style="font-size: 12px; color: #CFE9EE">best model</div></div>
+            <div><div style="font-weight: 800; font-size: 32px; line-height: 1; color: #00A9C5">[n] of [n]</div><div style="font-size: 12px; color: #CFE9EE">your rank</div></div>
+          </div>
+          <div style="flex-basis: 100%; font-size: 12px; color: #CFE9EE">Opens with Round 1, 2027 · sample</div>
+        </section>
+      </div>
+    </sc-if>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { sport: 'f1', mode: 'race', team: 'mclaren', watched: false };
+  }
+  renderVals() {
+    const teams = [
+      { id: 'alpine', name: 'Alpine', color: '#0093CC', d1: 'Gasly', d2: 'Colapinto' },
+      { id: 'aston', name: 'Aston Martin', color: '#229971', d1: 'Alonso', d2: 'Stroll' },
+      { id: 'audi', name: 'Audi', color: '#FF4D2E', d1: 'Bortoleto', d2: 'Hülkenberg' },
+      { id: 'cadillac', name: 'Cadillac', color: '#C9CDD2', d1: 'Pérez', d2: 'Bottas' },
+      { id: 'ferrari', name: 'Ferrari', color: '#E8002D', d1: 'Leclerc', d2: 'Hamilton' },
+      { id: 'haas', name: 'Haas', color: '#B6BABD', d1: 'Ocon', d2: 'Bearman' },
+      { id: 'mclaren', name: 'McLaren', color: '#FF8000', d1: 'Norris', d2: 'Piastri' },
+      { id: 'mercedes', name: 'Mercedes', color: '#27F4D2', d1: 'Russell', d2: 'Antonelli' },
+      { id: 'rb', name: 'Racing Bulls', color: '#6692FF', d1: '[live feed]', d2: '[live feed]' },
+      { id: 'redbull', name: 'Red Bull', color: '#3671C6', d1: 'Verstappen', d2: '[live feed]' },
+      { id: 'williams', name: 'Williams', color: '#64C4FF', d1: 'Albon', d2: 'Sainz' }
+    ];
+    const sel = teams.find((t) => t.id === this.state.team) || teams[6];
+    const c = sel.color;
+    const race = this.state.mode === 'race';
+    const tab = (on) => 'min-height: 40px; padding: 0 18px; border: 0; border-radius: 999px; cursor: pointer; font: 700 14px Urbanist, sans-serif; background: ' + (on ? '#F5F5F5' : 'transparent') + '; color: ' + (on ? '#0E0E0E' : '#B5B5BA') + ';';
+    return {
+      isF1: this.state.sport === 'f1',
+      isAfl: this.state.sport === 'afl',
+      pickF1: () => this.setState({ sport: 'f1' }),
+      pickAfl: () => this.setState({ sport: 'afl' }),
+      f1TabStyle: tab(this.state.sport === 'f1'),
+      aflTabStyle: tab(this.state.sport === 'afl'),
+      pickRace: () => this.setState({ mode: 'race' }),
+      pickOff: () => this.setState({ mode: 'off' }),
+      raceModeStyle: tab(race),
+      offModeStyle: tab(!race),
+      teams: teams.map((t) => {
+        const on = t.id === this.state.team;
+        return {
+          ...t,
+          pressed: on ? 'true' : 'false',
+          chipStyle: 'display: inline-flex; align-items: center; gap: 8px; min-height: 38px; padding: 0 12px; border-radius: 999px; cursor: pointer; font: 600 13px Urbanist, sans-serif; color: #F5F5F5; background: ' + (on ? '#1F1F1F' : 'transparent') + '; border: 1.5px solid ' + (on ? t.color : '#2A2A2A') + ';',
+          dotStyle: 'width: 10px; height: 10px; border-radius: 50%; background: ' + t.color + ';',
+          pick: () => this.setState({ team: t.id })
+        };
+      }),
+      sel,
+      shieldOn: !this.state.watched,
+      shieldOff: this.state.watched,
+      shieldTag: this.state.watched ? 'watched' : 'on until you watch',
+      markWatched: () => this.setState({ watched: true }),
+      hideAgain: () => this.setState({ watched: false }),
+      watermark: race ? 'AUSTIN' : '2027',
+      heroLabel: race ? 'United States Grand Prix · sample data' : 'Off-season · sample data',
+      countLabel: race ? 'Lights out in' : 'Pre-season testing in',
+      countValue: race ? '6:10:50' : '[n] days',
+      countSub: race ? 'days, hours, minutes · Mon 5:30am Adelaide' : 'Then car launches, then Round 1 in [n] days',
+      glowStyle: 'position: absolute; width: 440px; height: 440px; right: -120px; top: -180px; border-radius: 50%; background: ' + c + '; filter: blur(110px); opacity: 0.45;',
+      countStyle: 'font-family: Titillium Web, sans-serif; font-weight: 900; font-size: 92px; line-height: 1; letter-spacing: -0.02em; color: ' + c + ';',
+      teamBarStyle: 'height: 6px; border-radius: 999px; background: ' + c + ';',
+      teamNote: race ? 'Live positions go to your lock screen from lights out.' : 'Off-season: contract news, car launch date and testing pace for your team.',
+      panelTitle: race ? 'Sessions, Adelaide time' : 'Coming up',
+      panelRows: race
+        ? [{ a: 'Practice 1', b: 'Sat 4:00am' }, { a: 'Qualifying · alarm', b: 'Sun 7:30am' }, { a: 'Race · alarm 5:15am', b: 'Mon 5:30am' }]
+        : [{ a: sel.name + ' car launch', b: '[date]' }, { a: 'Pre-season testing', b: '[dates]' }, { a: 'Round 1', b: '[date]' }],
+      news: race
+        ? [{ source: sel.name + ' · team news', title: '[Latest team headline]' }, { source: 'Formula1.com', title: '[Latest headline]' }, { source: 'FIA · stewards decisions', title: '[Latest decision]' }, { source: 'Your Armchair Guide', title: 'US GP guide is ready in Notion' }]
+        : [{ source: 'Driver market', title: '[Latest contract headline]' }, { source: sel.name + ' · team news', title: '[Latest team headline]' }, { source: 'Regulations', title: '[Latest technical headline]' }, { source: 'Season review', title: 'Your 2026 in numbers' }]
+    };
+  }
+}
+</script>
+</body>
+</html>

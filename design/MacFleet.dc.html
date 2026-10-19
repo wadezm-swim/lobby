@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lobby Mac fleet room</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#ECECEC}
+a{color:#0E0E0E}a:hover{color:#444444}
+</style>
+</helmet>
+<div style="min-height: 1000px; box-sizing: border-box; background: #ECECEC; color: #0E0E0E; font-family: 'Urbanist', system-ui, sans-serif; font-size: 15px; line-height: 1.45; padding: 20px; display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
+
+  <nav aria-label="Rooms" style="flex: 0 0 84px; background: #FFFFFF; border-radius: 28px; padding: 18px 0; display: flex; flex-direction: column; align-items: center; gap: 10px">
+    <div aria-hidden="true" style="width: 48px; height: 48px; border-radius: 50%; background: #0E0E0E; color: #D4FF3F; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px; margin-bottom: 12px">L</div>
+    <a href="Main.dc.html" aria-label="Home" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></a>
+    <a href="MacWork.dc.html" aria-label="Work" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></a>
+    <a href="MacF1.dc.html" aria-label="Sports" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4h12l-2 4 2 4H5"/></svg></a>
+    <a href="MacFleet.dc.html" aria-label="Fleet" style="width: 48px; height: 48px; border-radius: 50%; background: #E40000; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16l20-6-4-2-6 2-6-5-2 1 4 6-5 2-2-1-1 1z"/></svg></a>
+    <a href="MacTrips.dc.html" aria-label="Trips" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M9 7V4h6v3"/></svg></a>
+    <a href="MacBrand.dc.html" aria-label="Brand" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg></a>
+  </nav>
+
+  <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+    <section style="position: relative; overflow: hidden; background: #E40000; color: #FFFFFF; border-radius: 28px; padding: 32px 36px; display: flex; flex-wrap: wrap; gap: 24px 40px; justify-content: space-between; align-items: flex-end">
+      <div aria-hidden="true" style="position: absolute; right: -40px; top: 0; bottom: 0; width: 320px; background: #B80000; clip-path: polygon(45% 0, 100% 0, 100% 100%, 0 100%)"></div>
+      <div style="position: relative">
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase">Fleet · sample data</div>
+        <h1 style="margin: 6px 0 4px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 52px; line-height: 1; letter-spacing: -0.03em">Qantas rego bingo</h1>
+        <p style="margin: 0; max-width: 520px">Fills itself from your flights. Spotted one? Type or point at the rego and Lobby looks it up.</p>
+      </div>
+      <div style="position: relative; display: flex; gap: 32px">
+        <div><div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 46px; line-height: 1">{{ flownCount }}</div><div style="font-size: 13px">flown on</div></div>
+        <div><div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 46px; line-height: 1">{{ seenCount }}</div><div style="font-size: 13px">spotted</div></div>
+        <div><div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 46px; line-height: 1">{{ totalCount }}</div><div style="font-size: 13px">shown</div></div>
+      </div>
+    </section>
+
+    <section aria-label="Airlines" style="background: #FFFFFF; border-radius: 28px; padding: 16px 18px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center">
+      <span style="font-weight: 700; margin-right: 6px">Airlines</span>
+      <button type="button" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 0; border-radius: 999px; background: #E40000; color: #FFFFFF; font: 700 14px 'Urbanist', sans-serif; cursor: pointer">Qantas · main card</button>
+      <button type="button" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 2px dashed #5C0632; border-radius: 999px; background: #FFFFFF; color: #5C0632; font: 700 14px 'Urbanist', sans-serif; cursor: pointer">Qatar Airways · wildcard · [n] seen</button>
+      <button type="button" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 2px dashed #B8860B; border-radius: 999px; background: #FFFFFF; color: #7A5A07; font: 700 14px 'Urbanist', sans-serif; cursor: pointer">Emirates · wildcard · [n] seen</button>
+      <button type="button" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 0; border-radius: 999px; background: #0E0E0E; color: #FFFFFF; font: 700 14px 'Urbanist', sans-serif; cursor: pointer">+ Import an airline</button>
+      <span style="font-size: 12px; color: #5F5F64; flex-basis: 100%">Wildcards pull in a whole fleet from a global aircraft database. Any rego you fly on or look up from another airline lands here on its own.</span>
+    </section>
+
+    <div role="group" aria-label="Filter by type" style="display: flex; flex-wrap: wrap; gap: 8px">
+      <sc-for list="{{ filters }}" as="f" hint-placeholder-count="3">
+        <button type="button" onClick="{{ f.pick }}" style="{{ f.style }}">{{ f.label }}</button>
+      </sc-for>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+      <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
+          <section style="background: #FFFFFF; border-radius: 28px; padding: 22px 24px; display: flex; flex-direction: column; gap: 14px">
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: baseline">
+              <h2 style="margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em">{{ g.name }}</h2>
+              <span style="font-size: 13px; color: #5F5F64">{{ g.summary }}</span>
+            </div>
+            <div style="height: 8px; border-radius: 999px; background: #F1F1F1; overflow: hidden"><div style="{{ g.barStyle }}"></div></div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 10px">
+              <sc-for list="{{ g.tiles }}" as="t" hint-placeholder-count="8">
+                <button type="button" onClick="{{ t.pick }}" aria-label="{{ t.aria }}" style="{{ t.style }}">
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500">{{ t.rego }}</span>
+                  <span style="{{ t.tagStyle }}">{{ t.tag }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </section>
+        </sc-for>
+      </div>
+
+      <aside style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <section style="background: #0E0E0E; color: #FFFFFF; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+          <div style="font-size: 13px; color: #B5B5BA">Selected</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 30px; line-height: 1">{{ sel.rego }}</div>
+          <div style="color: #D9D9DE">{{ sel.type }} · {{ sel.statusWord }}</div>
+          <div style="border-top: 1px solid #2A2A2A; padding-top: 10px; font-size: 14px; display: flex; justify-content: space-between; gap: 12px"><span style="color: #B5B5BA">Logged from</span><span>{{ sel.source }}</span></div>
+        </section>
+        <section style="background: #FFFFFF; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+          <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 20px">Flight log</div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+            <div><div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 26px">[n]</div><div style="font-size: 12px; color: #5F5F64">flights</div></div>
+            <div><div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 26px">[n] km</div><div style="font-size: 12px; color: #5F5F64">flown</div></div>
+          </div>
+          <div style="font-size: 13px; color: #5F5F64">Built from your booking emails.</div>
+        </section>
+      </aside>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filter: 'all',
+      selected: 'VH-ZNC',
+      marks: {
+        'VH-OQA': 'flown', 'VH-OQD': 'flown', 'VH-ZNA': 'flown', 'VH-ZNE': 'flown',
+        'VH-OQB': 'seen', 'VH-OQF': 'seen', 'VH-OQK': 'seen', 'VH-ZNC': 'seen', 'VH-ZNG': 'seen'
+      }
+    };
+  }
+  cycle(rego) {
+    const now = this.state.marks[rego] || 'none';
+    const next = now === 'none' ? 'seen' : now === 'seen' ? 'flown' : 'none';
+    this.setState({ marks: { ...this.state.marks, [rego]: next }, selected: rego });
+  }
+  renderVals() {
+    const fleets = [
+      { id: 'a380', name: 'A380-800', regos: ['VH-OQA','VH-OQB','VH-OQC','VH-OQD','VH-OQE','VH-OQF','VH-OQG','VH-OQH','VH-OQI','VH-OQJ','VH-OQK','VH-OQL'] },
+      { id: '789', name: '787-9', regos: ['VH-ZNA','VH-ZNB','VH-ZNC','VH-ZND','VH-ZNE','VH-ZNF','VH-ZNG','VH-ZNH'] }
+    ];
+    const marks = this.state.marks;
+    const base = 'display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-height: 60px; padding: 10px 12px; border-radius: 16px; cursor: pointer; text-align: left; font-family: inherit; ';
+    const look = {
+      none: { tile: 'background: #FFFFFF; color: #5F5F64; border: 1px solid #E4E4E4;', tag: 'font-size: 11px; color: #6E6E73;', word: 'Not yet', source: 'Not logged yet' },
+      seen: { tile: 'background: #FFFFFF; color: #0E0E0E; border: 2px solid #E40000;', tag: 'font-size: 11px; color: #C40000; font-weight: 700;', word: 'Spotted', source: 'Rego lookup' },
+      flown: { tile: 'background: #E40000; color: #FFFFFF; border: 2px solid #E40000;', tag: 'font-size: 11px; color: #FFFFFF; font-weight: 700;', word: 'Flown', source: 'Your flights' }
+    };
+    let flownCount = 0, seenCount = 0, totalCount = 0;
+    fleets.forEach((f) => f.regos.forEach((r) => {
+      totalCount += 1;
+      const m = marks[r] || 'none';
+      if (m === 'flown') { flownCount += 1; seenCount += 1; }
+      if (m === 'seen') { seenCount += 1; }
+    }));
+    const shown = fleets.filter((f) => this.state.filter === 'all' || this.state.filter === f.id);
+    const groups = shown.map((f) => {
+      const flown = f.regos.filter((r) => marks[r] === 'flown').length;
+      const seen = f.regos.filter((r) => marks[r] === 'seen' || marks[r] === 'flown').length;
+      return {
+        name: f.name,
+        summary: flown + ' of ' + f.regos.length + ' flown · ' + seen + ' spotted',
+        barStyle: 'height: 100%; background: #E40000; width: ' + Math.round(flown / f.regos.length * 100) + '%;',
+        tiles: f.regos.map((r) => {
+          const m = marks[r] || 'none';
+          const sel = this.state.selected === r ? 'outline: 2px solid #0E0E0E; outline-offset: 2px;' : '';
+          return { rego: r, tag: look[m].word, aria: r + ', ' + look[m].word + '. Activate to correct.', style: base + look[m].tile + sel, tagStyle: look[m].tag, pick: () => this.cycle(r) };
+        })
+      };
+    });
+    const chip = 'min-height: 40px; padding: 0 16px; border-radius: 999px; cursor: pointer; font: 600 14px Urbanist, sans-serif; ';
+    const filters = [
+      { id: 'all', label: 'All types' },
+      { id: 'a380', label: 'A380' },
+      { id: '789', label: '787-9' }
+    ].map((c) => ({
+      ...c,
+      style: chip + (this.state.filter === c.id ? 'background: #0E0E0E; color: #FFFFFF; border: 0;' : 'background: #FFFFFF; color: #0E0E0E; border: 0;'),
+      pick: () => this.setState({ filter: c.id })
+    }));
+    const selRego = this.state.selected;
+    const selFleet = fleets.find((f) => f.regos.indexOf(selRego) > -1);
+    const selMark = marks[selRego] || 'none';
+    return {
+      groups, filters, flownCount, seenCount, totalCount,
+      sel: { rego: selRego, type: selFleet ? selFleet.name : '', statusWord: look[selMark].word, source: look[selMark].source }
+    };
+  }
+}
+</script>
+</body>
+</html>

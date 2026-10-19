@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lobby iPhone fleet</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#ECECEC}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #ECECEC; color: #0E0E0E; font-family: 'Urbanist', system-ui, sans-serif; font-size: 15px; line-height: 1.4; padding: 28px 18px 0; display: flex; flex-direction: column; gap: 12px; position: relative; overflow: hidden">
+
+  <section style="position: relative; overflow: hidden; background: #E40000; color: #FFFFFF; border-radius: 28px; padding: 20px">
+    <div aria-hidden="true" style="position: absolute; right: -30px; top: 0; bottom: 0; width: 150px; background: #B80000; clip-path: polygon(45% 0, 100% 0, 100% 100%, 0 100%)"></div>
+    <div style="position: relative; font-size: 13px; font-weight: 600">Fleet · sample data</div>
+    <div style="position: relative; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 30px; line-height: 1.05; margin-top: 4px">Qantas bingo</div>
+    <div style="position: relative; display: flex; gap: 24px; margin-top: 12px">
+      <div><div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 32px; line-height: 1">4</div><div style="font-size: 12px">flown</div></div>
+      <div><div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 32px; line-height: 1">9</div><div style="font-size: 12px">spotted</div></div>
+    </div>
+  </section>
+
+  <button type="button" style="display: flex; align-items: center; gap: 14px; min-height: 76px; border: 0; border-radius: 24px; background: #0E0E0E; color: #FFFFFF; padding: 0 18px; text-align: left; cursor: pointer; font-family: inherit">
+    <span aria-hidden="true" style="width: 44px; height: 44px; border-radius: 50%; background: #FFFFFF; display: flex; align-items: center; justify-content: center; flex: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0E0E0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></span>
+    <span><span style="display: block; font-weight: 700; font-size: 16px">Point at a rego</span><span style="display: block; font-size: 12px; color: #B5B5BA">Or type it; Lobby looks it up</span></span>
+  </button>
+
+  <section style="background: #FFFFFF; border-radius: 24px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+    <div style="font-weight: 700">Recent finds</div>
+    <div style="display: flex; justify-content: space-between; align-items: center"><span style="font-family: 'JetBrains Mono', monospace">VH-ZNC</span><span style="border: 2px solid #E40000; color: #C40000; border-radius: 999px; padding: 2px 10px; font-size: 12px; font-weight: 700">Spotted · ADL</span></div>
+    <div style="display: flex; justify-content: space-between; align-items: center"><span style="font-family: 'JetBrains Mono', monospace">VH-OQD</span><span style="background: #E40000; color: #FFFFFF; border-radius: 999px; padding: 4px 10px; font-size: 12px; font-weight: 700">Flown · SYD–LAX</span></div>
+    <div style="display: flex; justify-content: space-between; align-items: center"><span style="font-family: 'JetBrains Mono', monospace">A7-[xxx]</span><span style="border: 2px dashed #5C0632; color: #5C0632; border-radius: 999px; padding: 2px 10px; font-size: 12px; font-weight: 700">Wildcard · Qatar</span></div>
+  </section>
+
+  <section style="background: #FFFFFF; border-radius: 24px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px">
+    <div style="display: flex; justify-content: space-between"><span style="font-weight: 700">A380-800</span><span style="font-size: 13px; color: #5F5F64">2 of 12 flown</span></div>
+    <div style="height: 8px; border-radius: 999px; background: #F1F1F1; overflow: hidden"><div style="width: 17%; height: 100%; background: #E40000"></div></div>
+    <div style="display: flex; justify-content: space-between"><span style="font-weight: 700">787-9</span><span style="font-size: 13px; color: #5F5F64">2 of 8 flown</span></div>
+    <div style="height: 8px; border-radius: 999px; background: #F1F1F1; overflow: hidden"><div style="width: 25%; height: 100%; background: #E40000"></div></div>
+  </section>
+
+  <nav aria-label="Rooms" style="position: absolute; left: 18px; right: 18px; bottom: 26px; background: #0E0E0E; border-radius: 999px; height: 68px; display: flex; align-items: center; justify-content: space-around; padding: 0 8px">
+    <a href="PhoneHome.dc.html" aria-label="Home" style="width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9B9B9F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></a>
+    <a href="PhoneSports.dc.html" aria-label="Sports" style="width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9B9B9F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4h12l-2 4 2 4H5"/></svg></a>
+    <button type="button" aria-label="Capture" style="width: 56px; height: 56px; border-radius: 50%; border: 0; background: #D4FF3F; color: #0E0E0E; font: 700 28px 'Urbanist', sans-serif; line-height: 1; cursor: pointer">+</button>
+    <a href="PhoneTrips.dc.html" aria-label="Trips" style="width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9B9B9F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M9 7V4h6v3"/></svg></a>
+    <a href="PhoneFleet.dc.html" aria-label="Fleet" style="width: 44px; height: 44px; border-radius: 50%; background: #E40000; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16l20-6-4-2-6 2-6-5-2 1 4 6-5 2-2-1-1 1z"/></svg></a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

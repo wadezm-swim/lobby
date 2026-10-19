@@ -1,0 +1,31 @@
+# macOS
+.DS_Store
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+DerivedData/
+build/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Firebase config and secrets: never commit these
+GoogleService-Info.plist
+.runtimeconfig.json
+functions/.env
+functions/.env.*
+functions/.secret.local
+.firebaserc
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Node
+node_modules/
+functions/lib/
+coverage/

@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lobby Mac brand room</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#ECECEC}
+a{color:#0E0E0E}a:hover{color:#444444}
+</style>
+</helmet>
+<div style="min-height: 1400px; box-sizing: border-box; background: #ECECEC; color: #0E0E0E; font-family: 'Urbanist', system-ui, sans-serif; font-size: 15px; line-height: 1.45; padding: 20px; display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
+
+  <nav aria-label="Rooms" style="flex: 0 0 84px; background: #FFFFFF; border-radius: 28px; padding: 18px 0; display: flex; flex-direction: column; align-items: center; gap: 10px">
+    <div aria-hidden="true" style="width: 48px; height: 48px; border-radius: 50%; background: #0E0E0E; color: #D4FF3F; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px; margin-bottom: 12px">L</div>
+    <a href="Main.dc.html" aria-label="Home" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></a>
+    <a href="MacWork.dc.html" aria-label="Work" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></a>
+    <a href="MacF1.dc.html" aria-label="Sports" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4h12l-2 4 2 4H5"/></svg></a>
+    <a href="MacFleet.dc.html" aria-label="Fleet" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16l20-6-4-2-6 2-6-5-2 1 4 6-5 2-2-1-1 1z"/></svg></a>
+    <a href="MacTrips.dc.html" aria-label="Trips" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M9 7V4h6v3"/></svg></a>
+    <a href="MacBrand.dc.html" aria-label="Brand" aria-current="page" style="width: 48px; height: 48px; border-radius: 50%; background: #D4FF3F; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E0E0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg></a>
+  </nav>
+
+  <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+
+    <section style="position: relative; overflow: hidden; background: #0E0E0E; color: #FFFFFF; border-radius: 28px; padding: 32px 36px; display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: flex-end">
+      <div aria-hidden="true" style="position: absolute; width: 360px; height: 360px; right: -80px; top: -200px; border-radius: 50%; background: #D4FF3F; filter: blur(100px); opacity: 0.3"></div>
+      <div style="position: relative">
+        <div style="font-size: 14px; color: #B5B5BA">Your superpower · from Cult Status</div>
+        <h1 style="margin: 8px 0 0; font-weight: 700; font-size: 44px; line-height: 1.05; letter-spacing: -0.02em; max-width: 640px">{{ superpower }}</h1>
+        <div style="margin-top: 10px; font-size: 14px; color: #B5B5BA">{{ superpowerNote }}</div>
+      </div>
+      <div role="group" aria-label="Brand" style="position: relative; display: flex; gap: 4px; background: #222222; border-radius: 999px; padding: 4px">
+        <button type="button" onClick="{{ pickBoth }}" aria-pressed="{{ bothPressed }}" style="{{ bothStyle }}">Both</button>
+        <button type="button" onClick="{{ pickSport }}" aria-pressed="{{ sportPressed }}" style="{{ sportStyle }}">Sport delivery</button>
+        <button type="button" onClick="{{ pickBarefoot }}" aria-pressed="{{ barefootPressed }}" style="{{ barefootStyle }}">Barefoot Luxury</button>
+      </div>
+    </section>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; align-items: stretch">
+
+      <section aria-label="Your week in four slices" style="background: #FFFFFF; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-weight: 700; font-size: 18px">Your week in four slices</span><span style="font-size: 12px; color: #5F5F64; border: 1px dashed #B9B9BE; border-radius: 999px; padding: 2px 10px">Sample</span></div>
+        <div style="display: flex; gap: 22px; align-items: center">
+          <svg width="150" height="150" viewBox="0 0 36 36" role="img" aria-label="Of 112 waking hours: work 46, relationships 24, mind 22, body 14" style="flex: none">
+            <circle cx="18" cy="18" r="15.5" fill="none" stroke="#F1F1F1" stroke-width="4.5"/>
+            <circle cx="18" cy="18" r="15.5" fill="none" stroke="#B89CFF" stroke-width="4.5" stroke-dasharray="39.6 97.4" transform="rotate(-90 18 18)"/>
+            <circle cx="18" cy="18" r="15.5" fill="none" stroke="#FFB27A" stroke-width="4.5" stroke-dasharray="20.5 97.4" stroke-dashoffset="-40.0" transform="rotate(-90 18 18)"/>
+            <circle cx="18" cy="18" r="15.5" fill="none" stroke="#7DBEFF" stroke-width="4.5" stroke-dasharray="18.7 97.4" stroke-dashoffset="-60.9" transform="rotate(-90 18 18)"/>
+            <circle cx="18" cy="18" r="15.5" fill="none" stroke="#5FD68E" stroke-width="4.5" stroke-dasharray="11.8 97.4" stroke-dashoffset="-80.0" transform="rotate(-90 18 18)"/>
+            <text x="18" y="17.5" text-anchor="middle" style="font: 800 7px Urbanist, sans-serif" fill="#0E0E0E">112</text>
+            <text x="18" y="22.5" text-anchor="middle" style="font: 600 2.6px Urbanist, sans-serif" fill="#5F5F64">waking hours</text>
+          </svg>
+          <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+            <div style="display: flex; align-items: center; gap: 8px"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #B89CFF; flex: none"></span><span style="flex: 1; font-weight: 600">Work</span><span style="font-weight: 700">46h</span><span style="font-size: 12px; color: #C40000; width: 56px; text-align: right">+18 over</span></div>
+            <div style="display: flex; align-items: center; gap: 8px"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FFB27A; flex: none"></span><span style="flex: 1; font-weight: 600">Relationships</span><span style="font-weight: 700">24h</span><span style="font-size: 12px; color: #5F5F64; width: 56px; text-align: right">4 under</span></div>
+            <div style="display: flex; align-items: center; gap: 8px"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #7DBEFF; flex: none"></span><span style="flex: 1; font-weight: 600">Mind</span><span style="font-weight: 700">22h</span><span style="font-size: 12px; color: #5F5F64; width: 56px; text-align: right">6 under</span></div>
+            <div style="display: flex; align-items: center; gap: 8px"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #5FD68E; flex: none"></span><span style="flex: 1; font-weight: 600">Body</span><span style="font-weight: 700">14h</span><span style="font-size: 12px; color: #5F5F64; width: 56px; text-align: right">14 under</span></div>
+            <div style="font-size: 12px; color: #5F5F64">Ideal is about 28h each · 6h untracked</div>
+          </div>
+        </div>
+        <div style="font-size: 12px; color: #5F5F64">From your calendars, Apple Health and listening time. Work Backwards, Tim Duggan.</div>
+      </section>
+
+      <section aria-label="After-hours work" style="background: #FFFFFF; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-weight: 700; font-size: 18px">After-hours work</span><span style="font-size: 13px; color: #5F5F64">This week · sample</span></div>
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 16px">
+          <div>
+            <div style="font-weight: 800; font-size: 56px; line-height: 1; letter-spacing: -0.04em">9h 40m</div>
+            <div style="font-size: 13px; color: #5F5F64; margin-top: 4px">outside 9 to 5 · Saturday meet: 6h</div>
+          </div>
+          <div role="img" aria-label="Last 8 weeks of after-hours work, highest on meet weekends" style="display: flex; align-items: flex-end; gap: 5px; height: 64px">
+            <span style="width: 10px; height: 22px; border-radius: 999px; background: #E4E4E4"></span>
+            <span style="width: 10px; height: 30px; border-radius: 999px; background: #E4E4E4"></span>
+            <span style="width: 10px; height: 58px; border-radius: 999px; background: #E4E4E4"></span>
+            <span style="width: 10px; height: 18px; border-radius: 999px; background: #E4E4E4"></span>
+            <span style="width: 10px; height: 26px; border-radius: 999px; background: #E4E4E4"></span>
+            <span style="width: 10px; height: 52px; border-radius: 999px; background: #E4E4E4"></span>
+            <span style="width: 10px; height: 20px; border-radius: 999px; background: #E4E4E4"></span>
+            <span style="width: 10px; height: 46px; border-radius: 999px; background: #0E0E0E"></span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; background: #F4F4F4; border-radius: 20px; padding: 10px 12px">
+          <div role="group" aria-label="Your work style" style="display: flex; gap: 4px; background: #FFFFFF; border-radius: 999px; padding: 3px; flex: none">
+            <button type="button" onClick="{{ pickSegmenter }}" aria-pressed="{{ segPressed }}" style="{{ segStyle }}">Segmenter</button>
+            <button type="button" onClick="{{ pickIntegrator }}" aria-pressed="{{ intPressed }}" style="{{ intStyle }}">Integrator</button>
+          </div>
+          <span style="font-size: 13px">{{ styleNote }}</span>
+        </div>
+        <div style="font-size: 12px; color: #5F5F64">From your work calendar. Last 8 weeks shown; the tall bars are meet weekends.</div>
+      </section>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; align-items: stretch">
+      <a href="MacIdeasLab.dc.html" aria-label="Open the Ideas lab" style="background: #0E0E0E; color: #FFFFFF; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; position: relative; overflow: hidden">
+        <span aria-hidden="true" style="position: absolute; width: 220px; height: 220px; right: -70px; bottom: -120px; border-radius: 50%; background: #D4FF3F; filter: blur(70px); opacity: 0.35"></span>
+        <span style="position: relative; display: flex; justify-content: space-between; align-items: baseline"><span style="font-weight: 700; font-size: 18px">Ideas lab</span><span style="font-size: 13px; color: #B5B5BA">[n] ideas waiting · from Killer Thinking</span></span>
+        <span style="position: relative; font-weight: 700; font-size: 24px; line-height: 1.2">[Your top idea this week]</span>
+        <span style="position: relative; display: flex; align-items: center; gap: 6px">
+          <span style="width: 30px; height: 30px; border-radius: 50%; background: #D4FF3F; color: #0E0E0E; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px">K</span>
+          <span style="width: 30px; height: 30px; border-radius: 50%; background: #D4FF3F; color: #0E0E0E; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px">I</span>
+          <span style="width: 30px; height: 30px; border-radius: 50%; background: #D4FF3F; color: #0E0E0E; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px">L</span>
+          <span style="width: 30px; height: 30px; border-radius: 50%; background: #D4FF3F; color: #0E0E0E; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px">L</span>
+          <span style="width: 30px; height: 30px; border-radius: 50%; background: #2A2A2A; color: #9B9B9F; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; box-shadow: inset 0 0 0 1.5px #555555">E</span>
+          <span style="width: 30px; height: 30px; border-radius: 50%; background: #D4FF3F; color: #0E0E0E; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px">R</span>
+          <span style="margin-left: 8px; font-weight: 700">5 of 6</span>
+        </span>
+        <span style="position: relative; font-size: 13px; color: #B5B5BA">Missing: Easy. Next step suggested · Open the lab →</span>
+      </a>
+
+      <section aria-label="This week's story" style="background: #FFE1CC; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-weight: 700; font-size: 18px">This week's story</span><span style="font-size: 13px; color: #5F5F64">Friday pick · sample</span></div>
+        <div style="font-weight: 700; font-size: 24px; line-height: 1.2">Saturday's meet: the 6am set-up nobody sees</div>
+        <div style="font-size: 14px">Found in your calendar, 14 photos from the pool deck and the Olly Timing notes in Notion.</div>
+        <sc-if value="{{ storyOpen }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto">
+            <button type="button" onClick="{{ saveStory }}" style="min-height: 44px; padding: 0 18px; border: 0; border-radius: 999px; background: #0E0E0E; color: #FFFFFF; font: 700 14px 'Urbanist', sans-serif; cursor: pointer">Save to story bank</button>
+            <button type="button" onClick="{{ skipStory }}" style="min-height: 44px; padding: 0 18px; border: 1.5px solid #0E0E0E; border-radius: 999px; background: transparent; color: #0E0E0E; font: 700 14px 'Urbanist', sans-serif; cursor: pointer">Not this one</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ storySaved }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; gap: 8px; align-items: center; margin-top: auto"><span style="background: #0E0E0E; color: #D4FF3F; border-radius: 999px; padding: 8px 14px; font-weight: 700; font-size: 14px">Saved to story bank</span><button type="button" onClick="{{ resetStory }}" style="min-height: 36px; padding: 0 12px; border: 0; background: transparent; font: 600 13px 'Urbanist', sans-serif; text-decoration: underline; cursor: pointer">Undo</button></div>
+        </sc-if>
+        <sc-if value="{{ storySkipped }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; gap: 8px; align-items: center; margin-top: auto"><span style="font-weight: 600; font-size: 14px">Skipped. Next pick on Friday.</span><button type="button" onClick="{{ resetStory }}" style="min-height: 36px; padding: 0 12px; border: 0; background: transparent; font: 600 13px 'Urbanist', sans-serif; text-decoration: underline; cursor: pointer">Undo</button></div>
+        </sc-if>
+      </section>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; align-items: start">
+      <section aria-label="Habits" style="background: #FFFFFF; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-weight: 700; font-size: 18px">Habits this week</span><span style="font-size: 13px; color: #5F5F64">Mon to Sun</span></div>
+        <div style="display: grid; grid-template-columns: 1fr repeat(7, 18px) 104px; gap: 6px; align-items: center"><span style="font-weight: 600">Train</span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #0E0E0E"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span style="font-size: 12px; color: #5F5F64; text-align: right">Health</span></div>
+        <div style="display: grid; grid-template-columns: 1fr repeat(7, 18px) 104px; gap: 6px; align-items: center"><span style="font-weight: 600">Swim</span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span style="font-size: 12px; color: #5F5F64; text-align: right">Health</span></div>
+        <div style="display: grid; grid-template-columns: 1fr repeat(7, 18px) 104px; gap: 6px; align-items: center"><span style="font-weight: 600">Sleep 7h+</span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #D4FF3F; box-shadow: inset 0 0 0 2px #0E0E0E"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span style="font-size: 12px; color: #5F5F64; text-align: right">Health</span></div>
+        <div style="display: grid; grid-template-columns: 1fr repeat(7, 18px) 104px; gap: 6px; align-items: center"><span style="font-weight: 600">Read or listen</span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #0E0E0E"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span style="font-size: 12px; color: #5F5F64; text-align: right">Spotify</span></div>
+        <div style="display: grid; grid-template-columns: 1fr repeat(7, 18px) 104px; gap: 6px; align-items: center"><span style="font-weight: 600">[Your habit]</span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; border: 2px solid #C9C9CE; box-sizing: border-box"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; background: #E4E4E4"></span><span style="font-size: 12px; color: #5F5F64; text-align: right">One tap</span></div>
+        <div style="font-size: 12px; color: #5F5F64">Ticks itself where the data exists. Anything else is one tap from the menu bar.</div>
+      </section>
+      <section aria-label="Goals" style="background: #FFFFFF; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-weight: 700; font-size: 18px">Goals this quarter</span><span style="font-size: 13px; color: #5F5F64">Oct to Dec</span></div>
+        <div><div style="display: flex; justify-content: space-between; font-weight: 600"><span>Swim pace to [target] per 100m</span><span>[x]%</span></div><div style="height: 10px; border-radius: 999px; background: #F1F1F1; margin-top: 6px; overflow: hidden"><div style="width: 35%; height: 100%; background: #0E0E0E; border-radius: 999px"></div></div></div>
+        <div><div style="display: flex; justify-content: space-between; font-weight: 600"><span>Finish the training block</span><span>Wk 9 of 14</span></div><div style="height: 10px; border-radius: 999px; background: #F1F1F1; margin-top: 6px; overflow: hidden"><div style="width: 64%; height: 100%; background: #D4FF3F; border-radius: 999px"></div></div></div>
+        <div><div style="display: flex; justify-content: space-between; font-weight: 600"><span>[n] LinkedIn posts</span><span>[x] of [n]</span></div><div style="height: 10px; border-radius: 999px; background: #F1F1F1; margin-top: 6px; overflow: hidden"><div style="width: 25%; height: 100%; background: #0E0E0E; border-radius: 999px"></div></div></div>
+        <div style="font-size: 12px; color: #5F5F64">Progress updates itself from Apple Health, Notion and your posts.</div>
+      </section>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; align-items: start">
+      <section aria-label="Anchor values" style="background: #FFFFFF; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-weight: 700; font-size: 18px">Anchor values</span><span style="font-size: 12px; color: #5F5F64">Work Backwards</span></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <span style="background: #0E0E0E; color: #FFFFFF; border-radius: 999px; padding: 8px 14px; font-weight: 600">[Anchor one]</span>
+          <span style="background: #0E0E0E; color: #FFFFFF; border-radius: 999px; padding: 8px 14px; font-weight: 600">[Anchor two]</span>
+          <span style="background: #0E0E0E; color: #FFFFFF; border-radius: 999px; padding: 8px 14px; font-weight: 600">[Anchor three]</span>
+        </div>
+        <div style="background: #F4F4F4; border-radius: 18px; padding: 12px 14px">
+          <div style="font-size: 12px; font-weight: 700; color: #5F5F64">Friday question</div>
+          <div style="font-weight: 600">Where did this week show them?</div>
+          <div style="font-size: 13px; color: #5F5F64; margin-top: 4px">Last Friday (sample): "Said no to the extra Sunday session."</div>
+        </div>
+      </section>
+      <section style="background: #D4FF3F; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 8px">
+        <div style="font-weight: 700; font-size: 18px">Voice</div>
+        <div style="font-weight: 600">Grounded, observational, slightly sharp</div>
+        <div style="font-size: 14px">No em dashes. No "not just X, but Y". Read-aloud scripts skip the words you've asked to avoid.</div>
+        <div style="background: #0E0E0E; color: #FFFFFF; border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 600; align-self: flex-start">2 flags on your LinkedIn draft</div>
+      </section>
+      <section aria-label="Mind" style="background: #CFE7FF; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-weight: 700; font-size: 18px">Mind</span><span style="font-size: 12px; color: #3A4B5C">Spotify</span></div>
+        <div style="font-size: 12px; font-weight: 700">Listening this week</div>
+        <div style="font-weight: 700; font-size: 32px; line-height: 1">[n]h</div>
+        <div style="font-size: 13px">Most played: [Podcast] · [Artist]</div>
+        <div style="display: flex; align-items: center; gap: 10px; background: #FFFFFF; border-radius: 18px; padding: 10px 12px; margin-top: 4px">
+          <span aria-hidden="true" style="width: 34px; height: 34px; border-radius: 10px; background: #1DB954; flex: none; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0E0E0E" stroke-width="2.4" stroke-linecap="round"><path d="M6 9.5c4-1.3 8.5-1 12 1"/><path d="M7 13c3.2-.9 6.8-.6 9.5.8"/><path d="M8 16.3c2.4-.6 4.9-.4 7 .6"/></svg></span>
+          <span style="min-width: 0"><span style="display: block; font-size: 12px; color: #5F5F64">Now playing on Spotify</span><span style="display: block; font-weight: 700">[Podcast or track]</span></span>
+        </div>
+        <div style="font-size: 13px">[n] ideas captured this month.</div>
+      </section>
+      <section style="background: #FFFFFF; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+        <div style="font-weight: 700; font-size: 18px">Aesthetics</div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+          <div style="aspect-ratio: 1; border-radius: 16px; background: #E7D9FF; display: flex; align-items: flex-end; padding: 8px; font-size: 12px; font-weight: 600">Southern Ocean Lodge</div>
+          <div style="aspect-ratio: 1; border-radius: 16px; background: #CDF5DC; display: flex; align-items: flex-end; padding: 8px; font-size: 12px; font-weight: 600">1 Hotel</div>
+          <div style="aspect-ratio: 1; border-radius: 16px; background: #CFE7FF; display: flex; align-items: flex-end; padding: 8px; font-size: 12px; font-weight: 600">[your album]</div>
+        </div>
+        <div style="font-size: 13px; color: #5F5F64">From your Barefoot Luxury manual and one Photos album.</div>
+      </section>
+      <section style="background: #FFFFFF; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; justify-content: space-between"><span style="font-weight: 700; font-size: 18px">Body</span><span style="font-size: 13px; color: #5F5F64">Apple Health</span></div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap">
+          <span style="background: #D4FF3F; border-radius: 999px; padding: 8px 14px; font-weight: 700">Well rested</span>
+          <span style="background: #F4F4F4; border-radius: 999px; padding: 8px 14px; font-weight: 700">2:19 /100m</span>
+          <span style="background: #F4F4F4; border-radius: 999px; padding: 8px 14px; font-weight: 700">Wk 9 of 14</span>
+        </div>
+      </section>
+      <section style="background: #FFE1CC; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 6px">
+        <div style="font-weight: 700; font-size: 18px">Story bank</div>
+        <div style="font-weight: 700; font-size: 20px; line-height: 1.2">First OllyGo meet halved the turn inspectors needed</div>
+        <div style="font-size: 14px">LinkedIn draft ready in your voice · [n] stories saved</div>
+      </section>
+      <section style="background: #FFFFFF; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 8px">
+        <div style="font-weight: 700; font-size: 18px">Presence</div>
+        <div style="display: flex; justify-content: space-between"><span>Barefoot Luxury · Instagram</span><span style="font-weight: 700">[n]</span></div>
+        <div style="display: flex; justify-content: space-between"><span>Barefoot Luxury · Threads</span><span style="font-weight: 700">[n]</span></div>
+        <div style="display: flex; justify-content: space-between"><span>LinkedIn</span><span style="font-weight: 700">Monthly export</span></div>
+      </section>
+      <section style="background: #E7D9FF; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 6px">
+        <div style="font-weight: 700; font-size: 18px">Proof and brand check</div>
+        <div style="font-size: 14px">[n] wins this quarter, ready for bios and award entries. Drafts are checked against your superpower line. Next brand check in [n] weeks.</div>
+      </section>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { brand: 'both', workStyle: 'integrator', story: 'open' };
+  }
+  renderVals() {
+    const brand = this.state.brand;
+    const pill = (on) => 'min-height: 40px; padding: 0 16px; border: 0; border-radius: 999px; cursor: pointer; font: 600 14px Urbanist, sans-serif; background: ' + (on ? '#FFFFFF' : 'transparent') + '; color: ' + (on ? '#0E0E0E' : '#D9D9DE') + ';';
+    const chip = (on) => 'min-height: 32px; padding: 0 12px; border: 0; border-radius: 999px; cursor: pointer; font: 700 13px Urbanist, sans-serif; background: ' + (on ? '#0E0E0E' : 'transparent') + '; color: ' + (on ? '#FFFFFF' : '#5F5F64') + ';';
+    const lines = {
+      both: { h: '[Your niche, in one line.]', n: 'Covers both sides of you. Written once, together.' },
+      sport: { h: '[Your sport delivery niche, in one line.]', n: 'Used for SwimmingSA and LinkedIn drafts.' },
+      barefoot: { h: '[Your Barefoot Luxury niche, in one line.]', n: 'Used for Instagram and Threads drafts.' }
+    };
+    const seg = this.state.workStyle === 'segmenter';
+    const story = this.state.story;
+    return {
+      superpower: lines[brand].h,
+      superpowerNote: lines[brand].n,
+      pickBoth: () => this.setState({ brand: 'both' }),
+      pickSport: () => this.setState({ brand: 'sport' }),
+      pickBarefoot: () => this.setState({ brand: 'barefoot' }),
+      bothStyle: pill(brand === 'both'),
+      sportStyle: pill(brand === 'sport'),
+      barefootStyle: pill(brand === 'barefoot'),
+      bothPressed: brand === 'both' ? 'true' : 'false',
+      sportPressed: brand === 'sport' ? 'true' : 'false',
+      barefootPressed: brand === 'barefoot' ? 'true' : 'false',
+      pickSegmenter: () => this.setState({ workStyle: 'segmenter' }),
+      pickIntegrator: () => this.setState({ workStyle: 'integrator' }),
+      segStyle: chip(seg),
+      intStyle: chip(!seg),
+      segPressed: seg ? 'true' : 'false',
+      intPressed: seg ? 'false' : 'true',
+      styleNote: seg ? 'Off duty is a hard stop at 5pm. Work hides until morning.' : 'Off duty eases in from 5pm. Work fades, not a hard stop.',
+      storyOpen: story === 'open',
+      storySaved: story === 'saved',
+      storySkipped: story === 'skipped',
+      saveStory: () => this.setState({ story: 'saved' }),
+      skipStory: () => this.setState({ story: 'skipped' }),
+      resetStory: () => this.setState({ story: 'open' })
+    };
+  }
+}
+</script>
+</body>
+</html>

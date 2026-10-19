@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lobby iPad home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&amp;family=Titillium+Web:wght@700;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#ECECEC}
+</style>
+</helmet>
+<div style="width: 1180px; height: 820px; box-sizing: border-box; background: #ECECEC; color: #0E0E0E; font-family: 'Urbanist', system-ui, sans-serif; font-size: 15px; line-height: 1.4; padding: 16px; display: flex; gap: 16px; overflow: hidden">
+
+  <nav aria-label="Rooms" style="flex: 0 0 72px; background: #FFFFFF; border-radius: 28px; padding: 16px 0; display: flex; flex-direction: column; align-items: center; gap: 8px">
+    <div aria-hidden="true" style="width: 44px; height: 44px; border-radius: 50%; background: #0E0E0E; color: #D4FF3F; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; margin-bottom: 10px">L</div>
+    <a href="iPadHome.dc.html" aria-label="Home" style="width: 44px; height: 44px; border-radius: 50%; background: #D4FF3F; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E0E0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></a>
+    <a href="MacWork.dc.html" aria-label="Work" style="width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></a>
+    <a href="MacF1.dc.html" aria-label="Sports" style="width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4h12l-2 4 2 4H5"/></svg></a>
+    <a href="MacFleet.dc.html" aria-label="Fleet" style="width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16l20-6-4-2-6 2-6-5-2 1 4 6-5 2-2-1-1 1z"/></svg></a>
+    <a href="MacTrips.dc.html" aria-label="Trips" style="width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M9 7V4h6v3"/></svg></a>
+    <a href="MacBrand.dc.html" aria-label="Brand" style="width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg></a>
+  </nav>
+
+  <main style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+    <header style="display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 56px">
+      <div><div style="font-size: 14px; color: #5F5F64">{{ sub }}</div><div style="font-weight: 700; font-size: 28px; line-height: 1.1">Good morning, Wade</div></div>
+      <div style="display: flex; align-items: center; gap: 10px">
+        <span style="font-size: 12px; color: #5F5F64; border: 1px dashed #B9B9BE; border-radius: 999px; padding: 4px 10px">Sample</span>
+        <div role="group" aria-label="Mode" style="display: flex; gap: 4px; background: #FFFFFF; border-radius: 999px; padding: 4px">
+          <sc-for list="{{ modes }}" as="m" hint-placeholder-count="3">
+            <button type="button" onClick="{{ m.pick }}" aria-pressed="{{ m.pressed }}" style="{{ m.style }}">{{ m.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+    </header>
+
+    <div style="flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: 236px 214px minmax(0, 1fr); gap: 16px">
+
+      <section style="background: #D4FF3F; border-radius: 28px; padding: 22px; display: flex; flex-direction: column">
+        <div style="display: flex; justify-content: space-between; font-weight: 600; font-size: 14px"><span>Next up</span><span>{{ next.when }}</span></div>
+        <div style="margin-top: auto; font-weight: 700; font-size: 64px; line-height: 1; letter-spacing: -0.04em">{{ next.time }}</div>
+        <div style="font-weight: 600; font-size: 16px">{{ next.what }}</div>
+      </section>
+
+      <a href="MacF1.dc.html" style="grid-column: span 2; position: relative; overflow: hidden; background: #0E0E0E; color: #FFFFFF; border-radius: 28px; padding: 22px 26px; text-decoration: none; display: flex; flex-direction: column">
+        <span aria-hidden="true" style="position: absolute; right: -10px; bottom: -36px; font-family: 'Titillium Web', sans-serif; font-weight: 900; font-style: italic; font-size: 150px; line-height: 1; color: #1A1A1A">AUSTIN</span>
+        <span aria-hidden="true" style="position: absolute; width: 300px; height: 300px; right: -60px; top: -160px; border-radius: 50%; background: #FF8000; filter: blur(90px); opacity: 0.5"></span>
+        <span style="position: relative; display: flex; align-items: center; gap: 10px"><span style="background: #E10600; color: #FFFFFF; font-family: 'Titillium Web', sans-serif; font-weight: 900; font-style: italic; font-size: 14px; padding: 3px 14px 3px 10px; clip-path: polygon(0 0, 100% 0, 86% 100%, 0 100%)">F1</span><span style="font-family: 'Titillium Web', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #B5B5BA">United States GP · McLaren</span></span>
+        <span style="position: relative; margin-top: 14px; font-family: 'Titillium Web', sans-serif; font-weight: 900; font-size: 72px; line-height: 0.95; color: #FF8000">4d 18h</span>
+        <span style="position: relative; font-size: 14px; color: #B5B5BA">to practice 1 · race Mon 5:30am, alarm set</span>
+        <span style="position: relative; margin-top: auto; display: flex; align-items: center; gap: 10px; border-top: 1px solid #222222; padding-top: 12px"><span style="background: #00A9C5; color: #000000; font-weight: 800; font-size: 12px; border-radius: 999px; padding: 3px 10px">AFL</span><span style="font-weight: 600">Port Adelaide · draft in [n] days</span></span>
+      </a>
+
+      <a href="MacFleet.dc.html" style="background: #FFFFFF; color: #0E0E0E; border-radius: 28px; padding: 22px; text-decoration: none; display: flex; flex-direction: column; gap: 10px">
+        <span style="display: flex; justify-content: space-between; font-weight: 700; font-size: 17px"><span>Fleet bingo</span><span style="font-size: 13px; font-weight: 600; color: #5F5F64">Qantas</span></span>
+        <span style="display: flex; align-items: center; gap: 18px; margin-top: auto">
+          <svg width="108" height="108" viewBox="0 0 36 36" role="img" aria-label="4 of 20 flown, 9 spotted"><circle cx="18" cy="18" r="15.5" fill="none" stroke="#EDEDED" stroke-width="5"/><circle cx="18" cy="18" r="15.5" fill="none" stroke="#E40000" stroke-width="5" stroke-dasharray="19.5 97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/><circle cx="18" cy="18" r="15.5" fill="none" stroke="#FFB3B3" stroke-width="5" stroke-dasharray="24.3 97.4" stroke-dashoffset="-19.5" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+          <span><span style="display: block; font-weight: 800; font-size: 34px; line-height: 1">4</span><span style="display: block; font-size: 13px; color: #5F5F64">flown</span><span style="display: block; font-weight: 800; font-size: 34px; line-height: 1; margin-top: 8px">9</span><span style="display: block; font-size: 13px; color: #5F5F64">spotted</span></span>
+        </span>
+      </a>
+
+      <a href="MacTrips.dc.html" style="background: #E7D9FF; color: #0E0E0E; border-radius: 28px; padding: 22px; text-decoration: none; display: flex; flex-direction: column">
+        <span style="display: flex; justify-content: space-between; font-weight: 600; font-size: 14px"><span>Next trip · group of three</span><span>[n] days</span></span>
+        <span style="margin-top: auto; font-weight: 800; font-size: 44px; line-height: 1; letter-spacing: -0.03em">Sri Lanka</span>
+        <span style="display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap">
+          <span style="background: #FFFFFF; border-radius: 999px; padding: 5px 12px; font-size: 13px; font-weight: 700">UL609 MEL → CMB</span>
+          <span style="background: #FFFFFF; border-radius: 999px; padding: 5px 12px; font-size: 13px; font-weight: 700">5 ideas to place</span>
+        </span>
+      </a>
+
+      <a href="MacBrand.dc.html" style="background: #FFFFFF; color: #0E0E0E; border-radius: 28px; padding: 22px; text-decoration: none; display: flex; flex-direction: column; gap: 10px">
+        <span style="display: flex; justify-content: space-between; font-weight: 700; font-size: 17px"><span>Your week, four slices</span><span style="font-size: 13px; font-weight: 600; color: #5F5F64">112 h awake</span></span>
+        <span style="display: flex; align-items: center; gap: 16px; margin-top: auto">
+          <svg width="108" height="108" viewBox="0 0 36 36" role="img" aria-label="Sample split of waking hours: work 44, relationships 26, mind 22, body 20"><circle cx="18" cy="18" r="15.9" fill="none" stroke="#0E0E0E" stroke-width="5" stroke-dasharray="39.3 100" transform="rotate(-90 18 18)"/><circle cx="18" cy="18" r="15.9" fill="none" stroke="#A98BFF" stroke-width="5" stroke-dasharray="23.2 100" stroke-dashoffset="-39.3" transform="rotate(-90 18 18)"/><circle cx="18" cy="18" r="15.9" fill="none" stroke="#5CB8FF" stroke-width="5" stroke-dasharray="19.6 100" stroke-dashoffset="-62.5" transform="rotate(-90 18 18)"/><circle cx="18" cy="18" r="15.9" fill="none" stroke="#3DCB7A" stroke-width="5" stroke-dasharray="17.9 100" stroke-dashoffset="-82.1" transform="rotate(-90 18 18)"/></svg>
+          <span style="display: grid; grid-template-columns: auto 1fr auto; gap: 4px 8px; align-items: center; font-size: 13px; flex: 1">
+            <span style="width: 10px; height: 10px; border-radius: 50%; background: #0E0E0E"></span><span>Work</span><span style="font-weight: 700">44 h</span>
+            <span style="width: 10px; height: 10px; border-radius: 50%; background: #A98BFF"></span><span>Relationships</span><span style="font-weight: 700">26 h</span>
+            <span style="width: 10px; height: 10px; border-radius: 50%; background: #5CB8FF"></span><span>Mind</span><span style="font-weight: 700">22 h</span>
+            <span style="width: 10px; height: 10px; border-radius: 50%; background: #3DCB7A"></span><span>Body</span><span style="font-weight: 700">20 h</span>
+          </span>
+        </span>
+      </a>
+
+      <section aria-label="Now playing on Spotify" style="grid-column: span 2; background: #0E0E0E; color: #FFFFFF; border-radius: 28px; padding: 18px 22px; display: flex; align-items: center; gap: 18px">
+        <div aria-hidden="true" style="flex: none; width: 96px; height: 96px; border-radius: 18px; background: linear-gradient(135deg, #1DB954, #0B3B44)"></div>
+        <div style="flex: 1; min-width: 0">
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #B5B5BA"><span style="width: 8px; height: 8px; border-radius: 50%; background: #1DB954"></span>{{ playLabel }}</div>
+          <div style="font-weight: 700; font-size: 22px; line-height: 1.15; margin-top: 4px">[Track]</div>
+          <div style="font-size: 14px; color: #B5B5BA">[Artist]</div>
+          <div style="height: 4px; border-radius: 999px; background: #2A2A2A; margin-top: 10px; overflow: hidden"><div style="width: 42%; height: 100%; background: #FFFFFF"></div></div>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px">
+          <div style="display: flex; gap: 8px">
+            <button type="button" onClick="{{ togglePlay }}" aria-label="{{ playAria }}" style="width: 52px; height: 52px; border-radius: 50%; border: 0; background: #FFFFFF; color: #0E0E0E; cursor: pointer; display: flex; align-items: center; justify-content: center">
+              <sc-if value="{{ playing }}" hint-placeholder-val="{{ true }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="#0E0E0E" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></sc-if>
+              <sc-if value="{{ paused }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="#0E0E0E" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg></sc-if>
+            </button>
+            <button type="button" aria-label="Skip" style="width: 52px; height: 52px; border-radius: 50%; border: 0; background: #2A2A2A; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M5 5l10 7-10 7z"/><rect x="16" y="5" width="3" height="14" rx="1"/></svg></button>
+          </div>
+          <span style="background: #1DB954; color: #0E0E0E; font-weight: 700; font-size: 13px; border-radius: 999px; padding: 6px 14px">Race-day playlist</span>
+        </div>
+      </section>
+
+      <section style="background: #FFFFFF; border-radius: 28px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px">
+        <div style="display: flex; justify-content: space-between"><span style="font-weight: 700">Top three</span><span style="font-size: 13px; color: #5F5F64">1 of 3 done</span></div>
+        <div style="display: flex; align-items: center; gap: 10px; background: #F4F4F4; border-radius: 999px; padding: 8px 10px; font-weight: 500"><span aria-hidden="true" style="width: 22px; height: 22px; border-radius: 50%; background: #0E0E0E; color: #D4FF3F; font-size: 13px; display: flex; align-items: center; justify-content: center; flex: none">✓</span><span style="text-decoration: line-through; color: #5F5F64">Weekly log</span></div>
+        <div style="display: flex; align-items: center; gap: 10px; background: #F4F4F4; border-radius: 999px; padding: 8px 10px; font-weight: 500"><span aria-hidden="true" style="width: 22px; height: 22px; border-radius: 50%; border: 2px solid #C9C9CE; box-sizing: border-box; flex: none"></span>COTY judges' sheet</div>
+        <div style="display: flex; align-items: center; gap: 10px; background: #F4F4F4; border-radius: 999px; padding: 8px 10px; font-weight: 500"><span aria-hidden="true" style="width: 22px; height: 22px; border-radius: 50%; border: 2px solid #C9C9CE; box-sizing: border-box; flex: none"></span>Olly Timing install quote</div>
+      </section>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1180,"height":820}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { mode: 'work', playing: true };
+  }
+  renderVals() {
+    const mode = this.state.mode;
+    const list = [
+      { id: 'work', label: 'Work' },
+      { id: 'off', label: 'Off duty' }
+    ];
+    const nexts = {
+      work: { when: 'in 40 min', time: '10:30', what: 'Ops catch-up · Boardroom' },
+      off: { when: 'tomorrow', time: '6:30am', what: 'ShredX upper, swim, sauna' }
+    };
+    const subs = { work: 'Monday 19 October · work hours', off: 'Monday 19 October · off duty' };
+    const playing = this.state.playing;
+    return {
+      sub: subs[mode],
+      next: nexts[mode],
+      modes: list.map((m) => {
+        const on = m.id === mode;
+        return {
+          ...m,
+          pressed: on ? 'true' : 'false',
+          style: 'min-height: 40px; padding: 0 16px; border: 0; border-radius: 999px; cursor: pointer; font: 600 14px Urbanist, sans-serif; background: ' + (on ? '#0E0E0E' : 'transparent') + '; color: ' + (on ? '#FFFFFF' : '#5F5F64') + ';',
+          pick: () => this.setState({ mode: m.id })
+        };
+      }),
+      playing: playing,
+      paused: !playing,
+      playLabel: playing ? 'Now playing · Spotify' : 'Paused · Spotify',
+      playAria: playing ? 'Pause' : 'Play',
+      togglePlay: () => this.setState({ playing: !this.state.playing })
+    };
+  }
+}
+</script>
+</body>
+</html>
