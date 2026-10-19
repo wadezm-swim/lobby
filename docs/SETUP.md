@@ -37,7 +37,7 @@ Firebase is the cloud that fills Sports with live F1, AFL and news and files cap
 2. Click **Create a project** (it may say **Get started with a Firebase project**).
 3. Name: **Lobby**. Click **Continue**.
 4. If it offers **Gemini in Firebase**, leave it off. Turn **off** Google Analytics. Click **Create project**, then **Continue** when it's ready.
-5. Write down the **project ID**. Click the **gear** next to **Project Overview**, then **Project settings**: it's on the first page, something like `lobby-4f2a1`. You'll paste it into GitHub later.
+5. Write down the **project ID**. It's in the browser's address bar after `/project/`, something like `lobby-6b45c`, and also on **Settings > Project settings** in the left list. You'll paste it into GitHub later.
 
 ### 2. Blaze and the budget alert
 
@@ -47,7 +47,7 @@ Firebase is the cloud that fills Sports with live F1, AFL and news and files cap
 
 ### 3. Firestore (the database)
 
-1. Back in the Firebase console, left menu **Build > Firestore Database**.
+1. Back in the Firebase console, left list under **Product categories**, click **Databases & Storage**, then **Firestore Database**. (The search box at the top, "Search for products", also finds anything by name.)
 2. Click **Create database**.
 3. If it asks **Standard** or **Enterprise** edition, choose **Standard**. Leave the database ID as **(default)**.
 4. Location: **australia-southeast1 (Sydney)**. This can't be changed later and the cloud code is set to it. Click **Next**.
@@ -55,13 +55,13 @@ Firebase is the cloud that fills Sports with live F1, AFL and news and files cap
 
 ### 4. Sign-in
 
-1. Left menu **Build > Authentication**, click **Get started**.
+1. Left list under **Product categories**, click **Security**, then **Authentication**. Click **Get started**.
 2. Under **Sign-in method**, click **Email/Password**, switch the first toggle **on**, click **Save**.
 3. Click the **Users** tab, then **Add user**. Enter your email and make up a password. This is the password you'll type into Lobby once. Click **Add user**.
 
 ### 5. Tell the app about the project
 
-1. **Project settings** (the gear), scroll to **Your apps**, click the **Apple** icon (it may say **iOS+**).
+1. Left list, **Settings** (the gear), then **Project settings**. Scroll to **Your apps**, click the **Apple** icon (it may say **iOS+**).
 2. Apple bundle ID: `com.wadezm.Lobby`. App nickname: **Lobby Mac**. Click **Register app**.
 3. Click **Download GoogleService-Info.plist**. Click **Next** through the rest, then **Continue to console**. Skip the SDK steps; that's done.
 4. In Finder, click the **Go** menu, hold **Option** and click **Library**. Open **Application Support**. If there's no **Lobby** folder, make one (**File > New Folder**, name it `Lobby`).
