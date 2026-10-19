@@ -1,0 +1,46 @@
+# Copies the NOTION_TOKEN repo secret into Firebase's Secret Manager, where
+# the captureToNotion function reads it. Run it once from the Actions tab
+# ("Run workflow"), and again if the Notion secret ever changes.
+name: Set Notion token
+
+on:
+  workflow_dispatch:
+
+jobs:
+  set:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check the secrets are there
+        env:
+          SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          PROJECT: ${{ secrets.FIREBASE_PROJECT_ID }}
+          TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: |
+          for pair in "FIREBASE_SERVICE_ACCOUNT:$SA" "FIREBASE_PROJECT_ID:$PROJECT" "NOTION_TOKEN:$TOKEN"; do
+            if [ -z "${pair#*:}" ]; then
+              echo "::error::The repo secret ${pair%%:*} is missing. Add it under Settings > Secrets and variables > Actions."
+              exit 1
+            fi
+          done
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Store the token in Firebase
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: |
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > "$RUNNER_TEMP/service-account.json"
+          printf '%s' "$NOTION_TOKEN" > "$RUNNER_TEMP/token.txt"
+          export GOOGLE_APPLICATION_CREDENTIALS="$RUNNER_TEMP/service-account.json"
+          npx --yes firebase-tools@15 functions:secrets:set NOTION_TOKEN \
+            --data-file "$RUNNER_TEMP/token.txt" \
+            --project "$FIREBASE_PROJECT_ID" \
+            --non-interactive \
+            --force
+          rm -f "$RUNNER_TEMP/service-account.json" "$RUNNER_TEMP/token.txt"
+          echo "Done. Now run the Deploy cloud workflow so the functions pick it up."

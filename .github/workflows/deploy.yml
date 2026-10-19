@@ -1,0 +1,79 @@
+# Deploys the cloud (functions and Firestore rules) to Wade's Firebase project.
+# Runs on its own when cloud files change, or from the Actions tab via
+# "Run workflow". Does nothing until the Firebase secrets are set up in
+# Settings > Secrets and variables > Actions (see docs/SETUP.md).
+name: Deploy cloud
+
+on:
+  push:
+    paths:
+      - functions/**
+      - firebase.json
+      - firestore.rules
+      - firestore.indexes.json
+      - .github/workflows/deploy.yml
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check Firebase is connected
+        id: check
+        env:
+          SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          PROJECT: ${{ secrets.FIREBASE_PROJECT_ID }}
+        run: |
+          if [ -z "$SA" ] || [ -z "$PROJECT" ]; then
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "Firebase isn't connected yet: FIREBASE_SERVICE_ACCOUNT and FIREBASE_PROJECT_ID are missing from the repo's secrets. Nothing deployed."
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v5
+        if: steps.check.outputs.ready == 'true'
+
+      - uses: actions/setup-node@v4
+        if: steps.check.outputs.ready == 'true'
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: functions/package-lock.json
+
+      - name: Install
+        if: steps.check.outputs.ready == 'true'
+        working-directory: functions
+        run: npm ci
+
+      - name: Settings the functions read at deploy
+        if: steps.check.outputs.ready == 'true'
+        env:
+          NOTION_INBOX_DATABASE_ID: ${{ secrets.NOTION_INBOX_DATABASE_ID }}
+          SQUIGGLE_CONTACT: ${{ secrets.SQUIGGLE_CONTACT }}
+        run: |
+          if [ -z "$NOTION_INBOX_DATABASE_ID" ] || [ -z "$SQUIGGLE_CONTACT" ]; then
+            echo "::error::Add NOTION_INBOX_DATABASE_ID and SQUIGGLE_CONTACT to the repo's secrets first."
+            exit 1
+          fi
+          printf 'NOTION_INBOX_DATABASE_ID=%s\nSQUIGGLE_CONTACT=%s\n' "$NOTION_INBOX_DATABASE_ID" "$SQUIGGLE_CONTACT" > functions/.env
+
+      - name: Deploy
+        if: steps.check.outputs.ready == 'true'
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+        run: |
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > "$RUNNER_TEMP/service-account.json"
+          export GOOGLE_APPLICATION_CREDENTIALS="$RUNNER_TEMP/service-account.json"
+          npx --yes firebase-tools@15 deploy \
+            --only functions,firestore \
+            --project "$FIREBASE_PROJECT_ID" \
+            --non-interactive \
+            --force
+          rm -f "$RUNNER_TEMP/service-account.json" functions/.env

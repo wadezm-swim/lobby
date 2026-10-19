@@ -1,128 +1,125 @@
-# Running Lobby on your Mac
+# Setting up Lobby
 
-Plain steps, one at a time. Nothing here costs money until the Firebase part, and that section says so before you get there.
+Everything here happens in a browser or Finder. No Xcode, no Terminal. Do the parts in order; each one says what it costs before you start.
 
-## Part 1: See it running (about 20 minutes, A$0)
+## Part 1: Get the app on your Mac (5 minutes, A$0)
 
-### 1. Install Xcode
+GitHub builds Lobby every time the code changes and keeps the latest copy at one link.
 
-1. Open the **App Store** on your Mac.
-2. Search for **Xcode** and click **Get**, then **Install**. It's free and large (about 12 GB), so give it time.
-3. When it's done, open **Xcode** once. Click **Agree** on the licence. If it offers to install extra components, click **Install** and let it finish.
+1. Download **https://github.com/wadezm-swim/lobby/releases/download/latest/Lobby.zip**
+2. In Finder, open **Downloads**, double-click **Lobby.zip**. You get **Lobby.app**.
+3. Drag **Lobby** into your **Applications** folder.
+4. Double-click it. macOS will say it can't open it because it's from an unidentified developer. Click **Done** (or **OK**).
+5. Open **System Settings > Privacy & Security**. Scroll down. Next to the line about Lobby being blocked, click **Open Anyway**. Confirm with your password or Touch ID.
+6. Lobby opens. That's the only time you'll see that prompt for this copy.
 
-### 2. Get the code
+**To update later:** download the same link again, unzip, drag the new Lobby over the old one in Applications and choose **Replace**. The Open Anyway step repeats because it's a new file.
 
-1. In Xcode, from the welcome window, click **Clone Git Repository...** (or the menu **Integrate > Clone...**).
-2. Paste this into the search box at the top: `https://github.com/wadezm-swim/lobby`
-3. Click **Clone**.
-4. When it asks which branch, pick **claude/new-session-x2y50h**. (If you'd rather it live on `main`, say so and I'll open a pull request and merge it.)
-5. Choose a folder to keep it in, for example **Documents**, and click **Clone**.
-
-Xcode opens the project. On the left you'll see folders called **Lobby** and **LobbyCore**.
-
-### 3. Press Play
-
-1. At the top of the window, next to the Play button, check it says **Lobby** and **My Mac**. If it says anything else, click it and choose those.
-2. Press the **Play** button (or hold **Command** and press **R**).
-3. The first build takes a minute or two. The Lobby window opens on its own.
-
-**If Xcode shows a red error about signing:** click **Lobby** at the top of the left-hand list (the blue icon), then the **Signing & Capabilities** tab. Next to **Team**, choose **Add an Account...**, sign in with your Apple ID, then pick the entry that says **(Personal Team)**. Press Play again. A free Apple ID is enough to run it on your own Mac.
-
-### 4. What you'll see
+### What you'll see
 
 - **The window.** Home, Work and Sports down the left. Fleet, Trips and Brand say what's coming in their phase.
-- **The menu bar.** A small dot up near the clock with the next thing on it. Click it for the glance.
-- **Option+Space** from anywhere opens the concierge. Type something like `chase officials roster thursday` and press Return. Up and down arrows choose, Esc closes.
-- **Light and dark** switch on their own at Adelaide sunrise and sunset. Sports is always dark.
-- **Work / Off duty** picks itself (weekdays 8:30 to 5). Tap the toggle to override it until the next change.
+- **The menu bar.** A dot near the clock with the next thing on it. Click it for the glance.
+- **Option+Space** from anywhere opens the concierge. Type `chase officials roster thursday` and press Return. Arrows choose, Esc closes.
+- **Light and dark** switch at Adelaide sunrise and sunset. Sports is always dark.
+- **Work / Off duty** picks itself (weekdays 8:30 to 5). Tap the toggle to override until the next change.
 
-Everything says **sample data** because it is. The meetings, top three, trips and body numbers are the ones from the mock-ups, with times built around today so the countdowns tick. The F1 and AFL teams, the spoiler shield, the qualifying picks, the daily three and captures all work for real; they just don't have live feeds behind them yet.
+Until Part 2 is done, everything says **sample data**. The teams, spoiler shield, picks, daily three and captures are real; the feeds behind them aren't yet.
 
-### 5. Things that are real already
+Closing the window leaves Lobby in the menu bar. To quit: click the window, then **Lobby > Quit Lobby** (Command-Q).
 
-- Captures (concierge, menu bar, Work room) are saved on your Mac in `~/Library/Application Support/Lobby/captures.json`. Once the cloud is on they'll go to Notion from there.
-- Your F1 team, AFL club, spoiler shield state, quiz answers and qualifying picks are remembered between launches.
-- Closing the window leaves Lobby in the menu bar. To quit properly: click the Lobby window, then **Lobby > Quit Lobby** in the top menu (or Command-Q).
+## Part 2: Firebase (30 minutes, needs a card, expect A$0 a month)
 
-## Part 2: The cloud (ask before this: it creates a Google Cloud project and needs a card on file)
+Firebase is the cloud that fills Sports with live F1, AFL and news and files captures in Notion. The **Blaze** plan is pay-as-you-go above a free allowance Lobby stays well inside. Step 2 sets a A$5 alert so nothing can run up quietly.
 
-The cloud is what fills Sports with real F1, AFL and news, and files captures in Notion. It runs on Firebase. At Lobby's usage it should sit at A$0 a month, but the Blaze plan is pay-as-you-go, so step 2 sets a A$5 alert.
-
-**Don't start this part until you've said yes to it.** When you do, here are the steps.
-
-### 1. Create the Firebase project (A$0)
+### 1. Create the project
 
 1. Go to **console.firebase.google.com** and sign in with your personal Google account.
-2. Click **Create a project**. Name it **Lobby**. Turn **off** Google Analytics. Click **Create**.
+2. Click **Create a project** (it may say **Get started with a Firebase project**).
+3. Name: **Lobby**. Click **Continue**.
+4. Turn **off** Google Analytics. Click **Create project**, then **Continue** when it's ready.
+5. Write down the **project ID**. Click the **gear** next to **Project Overview**, then **Project settings**: it's on the first page, something like `lobby-4f2a1`. You'll paste it into GitHub later.
 
-### 2. Blaze plan and the budget alert
+### 2. Blaze and the budget alert
 
-1. In the project, bottom left, click **Upgrade** (or the **Spark** label) and choose **Blaze**.
-2. It asks for a billing account and a card. Set up billing.
-3. When it offers a **budget**, set it to **5 AUD**. If it doesn't offer one, go to **console.cloud.google.com**, open **Billing > Budgets & alerts**, and create one for A$5 with email alerts.
+1. Bottom left of the console, click **Upgrade** (or the word **Spark**).
+2. Choose **Blaze (Pay as you go)**. Create a billing account when asked and add your card.
+3. When it offers to set a **budget**, enter **5** AUD and turn alerts on. If it doesn't offer, finish the upgrade, then open **console.cloud.google.com**, choose the Lobby project at the top, menu **Billing > Budgets & alerts > Create budget**, amount 5, and leave the email alerts ticked.
 
-### 3. Firestore
+### 3. Firestore (the database)
 
-1. Left menu: **Build > Firestore Database**, then **Create database**.
-2. Location: **australia-southeast1 (Sydney)**. This can't be changed later and the functions are set to that region.
-3. Choose **Production mode**. Click **Create**. (The rules in this repo replace the defaults when you deploy.)
+1. Back in the Firebase console, left menu **Build > Firestore Database**.
+2. Click **Create database**.
+3. Location: **australia-southeast1 (Sydney)**. This can't be changed later and the cloud code is set to it.
+4. Choose **Start in production mode**. Click **Create**.
 
-### 4. Tell the app about the project
+### 4. Sign-in
 
-1. Click the **gear** next to Project Overview, then **Project settings**.
-2. Under **Your apps**, click the **Apple** icon (it may say iOS+).
-3. Bundle ID: `com.wadezm.Lobby`. Nickname: **Lobby Mac**. Click **Register app**.
-4. Click **Download GoogleService-Info.plist**.
-5. In Finder, drag that file into the **Lobby** folder inside the project (the one with `App`, `Design`, `Rooms` in it). Git ignores this file on purpose; it's yours and stays on your Mac.
-6. Skip the "Add Firebase SDK" steps on that page. I'll wire the app to the cloud as the next build step once the project exists.
+1. Left menu **Build > Authentication**, click **Get started**.
+2. Under **Sign-in method**, click **Email/Password**, switch the first toggle **on**, click **Save**.
+3. Click the **Users** tab, then **Add user**. Enter your email and make up a password. This is the password you'll type into Lobby once. Click **Add user**.
 
-### 5. Install the command-line tools (A$0)
+### 5. Tell the app about the project
 
-1. Go to **nodejs.org** and download the **LTS** version (22). Open the installer and click through it.
-2. Open **Terminal** (Spotlight: press Command-Space, type Terminal, press Return).
-3. Paste this line and press Return: `npm install -g firebase-tools`
-4. Then: `firebase login`. A browser window opens; sign in with the same Google account.
+1. **Project settings** (the gear), scroll to **Your apps**, click the **Apple** icon (it may say **iOS+**).
+2. Apple bundle ID: `com.wadezm.Lobby`. App nickname: **Lobby Mac**. Click **Register app**.
+3. Click **Download GoogleService-Info.plist**. Click **Next** through the rest, then **Continue to console**. Skip the SDK steps; that's done.
+4. In Finder, click the **Go** menu, hold **Option** and click **Library**. Open **Application Support**. If there's no **Lobby** folder, make one (**File > New Folder**, name it `Lobby`).
+5. Drag **GoogleService-Info.plist** from Downloads into that **Lobby** folder.
 
-### 6. Notion
+Next time Lobby opens, it finds that file and asks you to sign in with the email and password from step 4.
+
+### 6. A key for GitHub to deploy with
+
+GitHub needs permission to put the cloud code into your project. This makes a key for that.
+
+1. Go to **console.cloud.google.com**. Make sure **Lobby** is the project selected at the top.
+2. Menu (three lines, top left) **IAM & Admin > Service Accounts**.
+3. Click **Create service account**. Name: `lobby-deploy`. Click **Create and continue**.
+4. Under **Select a role**, type `Editor` and choose **Basic > Editor**. Click **Continue**, then **Done**.
+5. In the list, click **lobby-deploy**. Open the **Keys** tab. Click **Add key > Create new key**. Leave **JSON** selected, click **Create**. A file downloads. Click **Close**.
+6. Keep that file for step 8, then delete it from Downloads. It gives full access to the project, so it should live in GitHub's secrets and nowhere else.
+
+### 7. Notion
 
 1. Go to **notion.so/my-integrations** (signed in to Notion).
 2. Click **New integration**. Name: **Lobby**. Pick your workspace. Click **Submit**.
-3. On the next page click **Show** next to **Internal Integration Secret**, then **Copy**. Keep it somewhere safe for a minute. Never paste it into the app or into a file in the project.
-4. In Notion, open the database you want captures to land in (your inbox). Click the **...** in the top right, then **Connections**, then **Connect to** and choose **Lobby**.
-5. Copy the database's ID from your browser's address bar: it's the 32 letters and numbers after the last `/` and before the `?`.
+3. Click **Show** next to **Internal Integration Secret**, then **Copy**. You'll paste it in step 8.
+4. In Notion, open the database captures should land in (your inbox). Click the **...** top right, **Connections**, **Connect to**, choose **Lobby**.
+5. Copy the database's ID from your browser's address bar: the 32 letters and numbers after the last `/` and before the `?`.
 
-The database needs a title column (every database has one). If it also has a date column called **Due** (or anything with "due" or "date" in the name), captures with a day in them fill it. Lobby works either way.
+If the database has a date column with "due" or "date" in its name, captures with a day in them fill it in. It works either way.
 
-### 7. Deploy
+### 8. Put the five secrets into GitHub
 
-In Terminal, one line at a time:
+1. Go to **github.com/wadezm-swim/lobby/settings/secrets/actions**.
+2. For each row below: click **New repository secret**, type the **Name** exactly, paste the **Value**, click **Add secret**.
 
-```
-cd ~/Documents/lobby
-firebase use --add
-```
+| Name | Value |
+|---|---|
+| `FIREBASE_PROJECT_ID` | The project ID from step 1 (like `lobby-4f2a1`) |
+| `FIREBASE_SERVICE_ACCOUNT` | Open the JSON file from step 6 in **TextEdit**, **Edit > Select All**, **Copy**, paste the whole thing |
+| `NOTION_TOKEN` | The integration secret from step 7 |
+| `NOTION_INBOX_DATABASE_ID` | The 32-character database ID from step 7 |
+| `SQUIGGLE_CONTACT` | Your personal email. Squiggle (the AFL feed) asks for a contact; it only ever goes to them |
 
-Pick the **Lobby** project and press Return for the alias. Then:
+### 9. Deploy
 
-```
-firebase functions:secrets:set NOTION_TOKEN
-```
+1. Go to **github.com/wadezm-swim/lobby/actions**.
+2. In the left list click **Set Notion token**, then the **Run workflow** button on the right, then the green **Run workflow**. Wait for the tick (about a minute).
+3. Then click **Deploy cloud** in the left list, **Run workflow**, **Run workflow**. This one takes five to ten minutes the first time: Google switches on a handful of services.
+4. Green tick: done. The sports feed refreshes itself every 15 minutes from now on. You can watch the data appear in the Firebase console under **Firestore Database**.
 
-Paste the Notion secret from step 6 and press Return. Then:
+**If the first deploy fails** with words like "service agent" or "Eventarc", that's Google still setting up. Wait two minutes and run **Deploy cloud** again. Anything else: I can read the run's log from here, so just tell me it went red.
 
-```
-cd functions
-npm install
-npm run deploy
-```
+From now on, any change I make to the cloud deploys itself when it's pushed.
 
-The first time, it asks two questions: the Notion database ID (paste it) and an email address for Squiggle's User-Agent (they ask for a contact; your personal email is fine). It remembers both in `functions/.env`, which git ignores.
+### 10. Sign in
 
-Deploying takes a few minutes. When it finishes, the sports feed refreshes every 15 minutes on its own and you can watch the data arrive in **Firestore Database** in the console.
+Open Lobby (download the latest build if I've said there's a new one). It sees the plist and asks for the email and password from step 4. After that, the cards switch from sample to live one at a time as I wire them.
 
 ## If something goes wrong
 
-- **Xcode says "No such module LobbyCore".** Click **File > Packages > Resolve Package Versions**, then build again.
-- **Option+Space does nothing.** Another app holds that shortcut (Spotlight if you've changed it, or Raycast or Alfred). Lobby shows a note at the bottom of the window when that happens. The search box on Home still opens the concierge.
-- **The build fails after you've changed nothing.** Clean it: hold **Shift** and press **Command-K**, then press Play again.
-- **Anything else.** Copy the red text and send it to me.
+- **"Lobby is damaged and can't be opened."** The zip got unpacked by something other than Finder. Delete it, download again, double-click the zip in Finder.
+- **Option+Space does nothing.** Another app holds that shortcut (Raycast, Alfred, or Spotlight if you've changed it). Lobby shows a note at the bottom of the window when that happens. The search box on Home still opens the concierge.
+- **Lobby asks you to sign in again after an update.** Expected for now: each download is a fresh copy and macOS keeps their keychain entries apart. Goes away once it's properly signed at the phone stage.
+- **Anything red on the Actions page.** Tell me which workflow; I can read the log.
