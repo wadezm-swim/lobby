@@ -21,6 +21,10 @@ struct LobbyApp: App {
         }
         .defaultSize(width: 1440, height: 900)
         .windowResizability(.contentMinSize)
+        // Launched from Finder, a Window scene next to a MenuBarExtra doesn't
+        // always present itself. Insist, and skip window restoration.
+        .defaultLaunchBehavior(.presented)
+        .restorationBehavior(.disabled)
 
         MenuBarExtra {
             GlanceView()
@@ -46,6 +50,25 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             model.hotKeyRegistered = false
             model.showToast("Option+Space is taken by another app. The search box on Home still opens the concierge.")
         }
+        // Belt and braces for the main window: open it if SwiftUI didn't.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            Self.openMainWindowIfMissing()
+        }
+    }
+
+    /// Clicking the Dock icon with no window open brings the window back.
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        if !flag { Self.openMainWindowIfMissing() }
+        return true
+    }
+
+    @MainActor
+    static func openMainWindowIfMissing() {
+        let hasWindow = NSApp.windows.contains { $0.isVisible && !($0 is NSPanel) && $0.styleMask.contains(.titled) }
+        guard !hasWindow else { return }
+        NSLog("Lobby: main window missing, opening it")
+        AppModel.shared.openMainWindow?()
+        NSApp.activate()
     }
 
     /// Closing the window leaves Lobby running in the menu bar.

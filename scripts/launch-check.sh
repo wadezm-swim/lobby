@@ -38,15 +38,19 @@ for i in $(seq 1 30); do
   sleep 1
 done
 
+show() {
+  if [ "$MODE" = open ]; then grep -E "Lobby: |[Ww]indow" "$LOG" | head -60; else cat "$LOG"; fi
+}
+
 if [ -n "${PID:-}" ] && kill -0 "$PID" 2>/dev/null; then
   if ready; then
     echo "[$MODE] Lobby showed its window after about ${i}s"
-    echo "--- app output ---"; cat "$LOG"
+    echo "--- app output ---"; show
     kill "$PID" 2>/dev/null || true
     exit 0
   fi
-  echo "::error::[$MODE] Lobby was alive after 30 seconds but never showed its window (a hang)"
-  echo "--- app output ---"; cat "$LOG"
+  echo "::error::[$MODE] Lobby was alive after 30 seconds but never showed its window"
+  echo "--- app output ---"; show
   echo "--- main thread sample ---"
   sample "$PID" 3 -file sample.txt >/dev/null 2>&1 || true
   awk '/com.apple.main-thread/{p=1} p{print} /^$/{if(p){exit}}' sample.txt | head -90

@@ -5,11 +5,18 @@ import LobbyCore
 /// What sits in the menu bar: a lime dot and the next thing.
 struct MenuBarLabel: View {
     let model: AppModel
+    @Environment(\.openWindow) private var openWindow
 
     var body: some View {
         HStack(spacing: 4) {
             Image(systemName: "circle.fill")
             Text(model.menuBarTitle)
+        }
+        // The menu bar item exists from launch, so this is the one place a
+        // way to open the main window is always on hand.
+        .onAppear {
+            let openWindow = openWindow
+            model.openMainWindow = { openWindow(id: "main") }
         }
     }
 }
