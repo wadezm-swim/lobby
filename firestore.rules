@@ -1,8 +1,9 @@
 rules_version = '2';
 
-// Lobby is a one-person app. Signed-in users read the shared sports and news
-// documents, and each user owns their own captures. Only the cloud writes the
-// sports and news documents.
+// Lobby is a one-person app. The sports and news documents hold public facts
+// (F1 schedules, the AFL ladder, headlines) and are readable without a login,
+// because the Mac app can't sign in until it's properly signed. Each user owns
+// their own captures. Only the cloud writes the sports and news documents.
 service cloud.firestore {
   match /databases/{database}/documents {
     function signedIn() {
@@ -10,12 +11,12 @@ service cloud.firestore {
     }
 
     match /sports/{doc} {
-      allow read: if signedIn();
+      allow read: if true;
       allow write: if false;
     }
 
     match /news/{doc} {
-      allow read: if signedIn();
+      allow read: if true;
       allow write: if false;
     }
 

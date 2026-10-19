@@ -1,4 +1,3 @@
-import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
 import Foundation
@@ -6,9 +5,13 @@ import LobbyCore
 import Observation
 
 /// Lobby's link to Firebase. Configures from a GoogleService-Info.plist in
-/// Application Support (so it never ships inside the app or the repo), signs
-/// in with email and password, listens to the documents the cloud writes and
-/// hands captures up.
+/// Application Support (so it never ships inside the app or the repo) and
+/// listens to the documents the cloud writes.
+///
+/// There is no sign-in yet: Firebase's sign-in on a Mac needs the kind of
+/// keychain access only a properly signed app gets, which arrives with the
+/// phone stage. The sports and news documents are public reads, so the Sports
+/// room goes live without it. Captures wait on the Mac until then.
 ///
 /// With no plist, nothing here runs and the app stays on sample data.
 @MainActor
@@ -16,16 +19,12 @@ import Observation
 final class CloudService {
     enum State: Equatable {
         case noConfig
-        case signedOut
-        case signedIn(uid: String)
+        case live
     }
 
     private(set) var state: State = .noConfig
-    private(set) var signInError: String?
-    private(set) var isSigningIn = false
 
     @ObservationIgnored private var listeners: [ListenerRegistration] = []
-    @ObservationIgnored private var authHandle: AuthStateDidChangeListenerHandle?
     @ObservationIgnored private weak var model: AppModel?
 
     static let configURL: URL = {
@@ -36,13 +35,6 @@ final class CloudService {
 
     var isConfigured: Bool { state != .noConfig }
 
-    var needsSignIn: Bool { state == .signedOut }
-
-    var uid: String? {
-        if case .signedIn(let uid) = state { return uid }
-        return nil
-    }
-
     /// Call once at launch, before anything else touches Firebase.
     func configure(model: AppModel) {
         self.model = model
@@ -52,56 +44,9 @@ final class CloudService {
             return
         }
         FirebaseApp.configure(options: options)
-        state = .signedOut
-        authHandle = Auth.auth().addStateDidChangeListener { [weak self] _, user in
-            Task { @MainActor in self?.authChanged(user) }
-        }
-    }
-
-    private func authChanged(_ user: User?) {
-        if let user {
-            state = .signedIn(uid: user.uid)
-            listen()
-            uploadQueuedCaptures()
-        } else {
-            state = .signedOut
-            stopListening()
-        }
-    }
-
-    func signIn(email: String, password: String) {
-        guard !isSigningIn else { return }
-        isSigningIn = true
-        signInError = nil
-        Task {
-            do {
-                try await Auth.auth().signIn(withEmail: email.trimmingCharacters(in: .whitespaces), password: password)
-            } catch {
-                signInError = Self.plainWords(for: error)
-            }
-            isSigningIn = false
-        }
-    }
-
-    func signOut() {
-        try? Auth.auth().signOut()
-    }
-
-    /// Firebase's error text is for developers. These are for Wade.
-    static func plainWords(for error: Error) -> String {
-        guard let code = AuthErrorCode(rawValue: (error as NSError).code) else { return "Couldn't sign in. Try again in a minute." }
-        switch code {
-        case .wrongPassword, .invalidCredential, .userNotFound, .invalidEmail:
-            return "That email and password don't match what's in Firebase."
-        case .networkError:
-            return "No connection. Lobby keeps running on what it has."
-        case .tooManyRequests:
-            return "Too many tries. Give it a few minutes."
-        case .userDisabled:
-            return "That account is switched off in Firebase."
-        default:
-            return "Couldn't sign in. Try again in a minute."
-        }
+        state = .live
+        LaunchLog.note("firebase configured")
+        listen()
     }
 
     // MARK: - Reading
@@ -142,30 +87,7 @@ final class CloudService {
 
     // MARK: - Captures
 
-    /// Sends every capture still waiting on the Mac. The cloud files it in Notion.
-    func uploadQueuedCaptures() {
-        guard let uid, let model else { return }
-        let db = Firestore.firestore()
-        let formatter = ISO8601DateFormatter()
-        for capture in model.captures where capture.status == .queued {
-            var fields: [String: Any] = [
-                "text": capture.text,
-                "title": capture.title,
-                "kind": capture.kind.rawValue,
-                "createdAt": formatter.string(from: capture.createdAt),
-                "status": "queued",
-            ]
-            if let due = capture.due { fields["due"] = formatter.string(from: due) }
-            if let projectID = capture.projectID { fields["projectID"] = projectID }
-            db.document("users/\(uid)/captures/\(capture.id)").setData(fields) { [weak self] error in
-                Task { @MainActor in
-                    if let error {
-                        NSLog("Lobby: capture didn't upload: \(error.localizedDescription)")
-                    } else {
-                        self?.model?.markCaptureSent(capture.id)
-                    }
-                }
-            }
-        }
-    }
+    /// Captures go to Notion through the cloud once the app can sign in. Until
+    /// then they stay in the Mac's queue, which this leaves alone.
+    func uploadQueuedCaptures() {}
 }

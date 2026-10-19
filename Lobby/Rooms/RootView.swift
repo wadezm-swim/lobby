@@ -33,13 +33,6 @@ struct RootView: View {
         .padding(.leading, 20)
         .background(palette.canvas)
         .overlay(alignment: .bottom) { ToastView() }
-        .sheet(isPresented: Binding(get: { model.cloud.needsSignIn && !model.signInDismissed }, set: { _ in })) {
-            SignInView(cloud: model.cloud) {
-                model.signInDismissed = true
-                model.showToast("Sample data until you sign in. Quit and reopen Lobby to see this again.")
-            }
-            .environment(\.palette, palette)
-        }
         .environment(\.palette, palette)
         .preferredColorScheme(palette.isDark ? .dark : .light)
         .font(.urbanist(15))

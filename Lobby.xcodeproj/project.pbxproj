@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4C0B0B00000000000000A00A /* LobbyCore in Frameworks */ = {isa = PBXBuildFile; productRef = 4C0B0B00000000000000A00C /* LobbyCore */; };
-		4C0B0B00000000000000A023 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4C0B0B00000000000000A021 /* FirebaseAuth */; };
 		4C0B0B00000000000000A024 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4C0B0B00000000000000A022 /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
 
@@ -30,7 +29,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C0B0B00000000000000A00A /* LobbyCore in Frameworks */,
-				4C0B0B00000000000000A023 /* FirebaseAuth in Frameworks */,
 				4C0B0B00000000000000A024 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -75,7 +73,6 @@
 			name = Lobby;
 			packageProductDependencies = (
 				4C0B0B00000000000000A00C /* LobbyCore */,
-				4C0B0B00000000000000A021 /* FirebaseAuth */,
 				4C0B0B00000000000000A022 /* FirebaseFirestore */,
 			);
 			productName = Lobby;
@@ -356,11 +353,6 @@
 		4C0B0B00000000000000A00C /* LobbyCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = LobbyCore;
-		};
-		4C0B0B00000000000000A021 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4C0B0B00000000000000A020 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
 		};
 		4C0B0B00000000000000A022 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -207,8 +207,8 @@ struct CaptureCard: View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Capture").font(.urbanist(18, .bold))
             Text(model.queuedCaptureCount == 0
-                 ? "Lands in your Notion inbox, filed by project"
-                 : "Lands in your Notion inbox, filed by project · \(model.queuedCaptureCount) waiting to send")
+                 ? "Kept on this Mac for now. Notion filing arrives with the phone build."
+                 : "Kept on this Mac for now · \(model.queuedCaptureCount) saved. Notion filing arrives with the phone build.")
                 .font(.urbanist(13))
                 .foregroundStyle(Palette.sportsSecondary)
             TextField("", text: $text, prompt: Text("Type or press ⌥ Space anywhere").foregroundStyle(Color(hex: "#7A7A7F")))

@@ -72,7 +72,6 @@ final class AppModel {
     var hotKeyRegistered = true
     /// The link to Firebase. Does nothing until the config file exists.
     let cloud = CloudService()
-    var signInDismissed = false
     @ObservationIgnored private var live = LiveSports()
     /// Set by the main window so the concierge and menu bar can bring it back.
     @ObservationIgnored var openMainWindow: (() -> Void)?
