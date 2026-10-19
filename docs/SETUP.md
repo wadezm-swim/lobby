@@ -36,7 +36,7 @@ Firebase is the cloud that fills Sports with live F1, AFL and news and files cap
 1. Go to **console.firebase.google.com** and sign in with your personal Google account.
 2. Click **Create a project** (it may say **Get started with a Firebase project**).
 3. Name: **Lobby**. Click **Continue**.
-4. Turn **off** Google Analytics. Click **Create project**, then **Continue** when it's ready.
+4. If it offers **Gemini in Firebase**, leave it off. Turn **off** Google Analytics. Click **Create project**, then **Continue** when it's ready.
 5. Write down the **project ID**. Click the **gear** next to **Project Overview**, then **Project settings**: it's on the first page, something like `lobby-4f2a1`. You'll paste it into GitHub later.
 
 ### 2. Blaze and the budget alert
@@ -49,8 +49,9 @@ Firebase is the cloud that fills Sports with live F1, AFL and news and files cap
 
 1. Back in the Firebase console, left menu **Build > Firestore Database**.
 2. Click **Create database**.
-3. Location: **australia-southeast1 (Sydney)**. This can't be changed later and the cloud code is set to it.
-4. Choose **Start in production mode**. Click **Create**.
+3. If it asks **Standard** or **Enterprise** edition, choose **Standard**. Leave the database ID as **(default)**.
+4. Location: **australia-southeast1 (Sydney)**. This can't be changed later and the cloud code is set to it. Click **Next**.
+5. Choose **Start in production mode**. Click **Create**.
 
 ### 4. Sign-in
 
@@ -84,8 +85,9 @@ GitHub needs permission to put the cloud code into your project. This makes a ke
 1. Go to **notion.so/my-integrations** (signed in to Notion).
 2. Click **New integration**. Name: **Lobby**. Pick your workspace. Click **Submit**.
 3. Click **Show** next to **Internal Integration Secret**, then **Copy**. You'll paste it in step 8.
-4. In Notion, open the database captures should land in (your inbox). Click the **...** top right, **Connections**, **Connect to**, choose **Lobby**.
-5. Copy the database's ID from your browser's address bar: the 32 letters and numbers after the last `/` and before the `?`.
+4. In Notion, open the database captures should land in (your inbox). If it sits inside a page, hover over it and click **Open as full page** (the arrows icon) so it fills the window.
+5. Click the **...** top right, **Connections**, **Connect to**, choose **Lobby**.
+6. Copy the database's ID from your browser's address bar: the 32 letters and numbers after the last `/` and before the `?`.
 
 If the database has a date column with "due" or "date" in its name, captures with a day in them fill it in. It works either way.
 
