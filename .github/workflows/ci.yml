@@ -2,6 +2,10 @@ name: CI
 
 on:
   push:
+    paths-ignore:
+      - "**.md"
+      - docs/**
+      - design/**
   pull_request:
   workflow_dispatch:
 

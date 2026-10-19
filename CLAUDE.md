@@ -165,45 +165,54 @@ That comes to about A$185–235 a year in total. Card FX fees may add 2–3% on 
 - **Instagram:** is Barefoot Luxury a Creator or Business account? Needed for stats.
 - **Flight data provider:** to confirm at Trips.
 
-## Status (end of the first build session, 19 October 2026)
+## Status (19 October 2026, after the second build session)
 
-Read `docs/SETUP.md` for how Wade runs it. Everything below is what exists on branch `claude/new-session-x2y50h`.
+Read `docs/SETUP.md` for how Wade gets it running: browser and Finder only, no Xcode, no Terminal. Everything below is on branch `claude/new-session-x2y50h`; `main` stays empty until Wade says merge. Wade said yes to Blaze on 19 October.
 
 ### Built
 
-- **`LobbyCore/`**: a plain Swift package, no UI, 34 tests. Adelaide time and formatting, sunrise and sunset for day/night, work hours and the Work/Off duty override, meetings and next up, the weekly log timing, the spoiler shield, qualifying picks scoring, the daily three and streak, capture parsing ("chase officials roster thursday" becomes a titled task due Thursday), project matching, sample data, and the F1 room's content (race week vs off-season). Tests run on Linux and Mac: `swift test --package-path LobbyCore`.
-- **`Lobby/` + `Lobby.xcodeproj`**: the Mac app. Home (card order flips with the mode), Work, Sports (F1 with all 11 teams and the AFL side with all 18 clubs), the menu bar glance (`MenuBarExtra`), the Option+Space concierge (Carbon hot key, no Accessibility permission needed; options, search, Command-1/2/3). Fleet, Trips and Brand are honest placeholders naming their phase. Urbanist and Titillium Web are bundled (SIL OFL, licences in `Lobby/Resources/Fonts`). App icon is generated. Bundle id `com.wadezm.Lobby`, macOS 14+.
-- **`functions/`**: Firebase Cloud Functions in TypeScript, 34 tests on trimmed captures of the real feeds, plus `npm run smoke` which hits the live APIs. One scheduled job every 15 minutes (`sportsTick`) refreshes what's due: Jolpica (calendar, standings, latest race and qualifying top three), Squiggle (ladder, live scores, next two rounds, last round, computer model scores), and the news wire (six F1 feeds plus AFL.com.au), each headline tagged by team or club and flagged if it might spoil the latest result. `captureToNotion` files `users/{uid}/captures/*` in his Notion inbox. Secrets stay in Firebase (`NOTION_TOKEN`); `firestore.rules` lets signed-in users read sports and news and only their own captures.
-- **CI**: `.github/workflows/ci.yml` builds the Mac app and runs both test suites on every push.
+- **`LobbyCore/`**: plain Swift, no UI, 41 tests, runs on Linux and Mac (`swift test --package-path LobbyCore`). Adelaide time and formatting, sunrise and sunset for day/night, work hours and the Work/Off duty override, meetings and next up, the weekly log timing, the spoiler shield, qualifying picks scoring, the daily three and streak, capture parsing, project matching, sample data, the F1 room's content, and `Cloud.*`: the shapes the functions write to Firestore plus their mapping into the app's models (including the AFL card written for his club: live score, next game, last result, off-season opener).
+- **`Lobby/` + `Lobby.xcodeproj`**: the Mac app, macOS 14+, bundle id `com.wadezm.Lobby`. Home (card order flips with the mode), Work, Sports (11 F1 teams, 18 AFL clubs, shield, picks), menu bar glance, Option+Space concierge. Fleet, Trips and Brand are honest placeholders. Urbanist and Titillium Web bundled (SIL OFL). Firebase: `firebase-ios-sdk` 13.x (FirebaseAuth, FirebaseFirestore). The app reads `GoogleService-Info.plist` from `~/Library/Application Support/Lobby/`, never from the bundle or the repo. With it, a sign-in sheet takes email and password ("Not now" keeps sample data for that launch). Signed in, Firestore listeners lay live data over the sample snapshot one document at a time, and captures upload to `users/{uid}/captures`.
+- **`functions/`**: Cloud Functions in TypeScript, 34 tests on trimmed captures of the real feeds, `npm run smoke` against the live APIs. `sportsTick` every 15 minutes refreshes what's due (Jolpica, Squiggle, six F1 feeds plus AFL.com.au, headlines tagged and flagged for spoilers); `captureToNotion` files captures in his Notion inbox. Region `australia-southeast1`.
+- **GitHub does the building and deploying.** `CI` builds the app on a Mac runner, ad-hoc signs it and publishes `Lobby.zip` at `https://github.com/wadezm-swim/lobby/releases/download/latest/Lobby.zip` on every push. `Deploy cloud` pushes functions and Firestore rules with the repo's secrets and stays quiet until they exist. `Set Notion token` copies `NOTION_TOKEN` into Secret Manager once.
+
+### Live or sample, once Firebase is on
+
+- **Live:** F1 calendar, countdowns and sessions in Adelaide time, standings and the latest top three (hidden behind the shield), the F1 news wire, the AFL card and news wire, captures to Notion.
+- **Still sample:** meetings, top three, waiting on, projects, trips, body, fleet, now playing, the quiz bank. Each waits on its own source: the work calendar route, Notion projects, Gmail, HealthKit (Phase 2), Spotify.
 
 ### Firestore layout the cloud writes
 
-`sports/f1Calendar` (season, weekends with UTC sessions), `sports/f1Standings`, `sports/f1Latest` (race and qualifying top three; spoilers, the app must hide them while the shield is up), `sports/afl` (ladder, live, upcoming, recent, models), `news/f1` and `news/afl` (up to 60 items each, `tags`, `mayContainResult`), `system/sync` (when each task last ran).
+`sports/f1Calendar` (season, weekends with UTC sessions), `sports/f1Standings`, `sports/f1Latest` (race and qualifying top three), `sports/afl` (ladder, live, upcoming, recent, models), `news/f1` and `news/afl` (up to 60 items each with `tags` and `mayContainResult`), `system/sync`. The app writes `users/{uid}/captures/{id}`; the cloud sets its `status` to `sent`, `kept` or `failed`.
+
+### Secrets the workflows expect
+
+Repo Settings > Secrets and variables > Actions: `FIREBASE_PROJECT_ID`, `FIREBASE_SERVICE_ACCOUNT` (the JSON key of an Editor service account), `NOTION_TOKEN`, `NOTION_INBOX_DATABASE_ID`, `SQUIGGLE_CONTACT`. The functions' two params land in `functions/.env` at deploy time, which git ignores.
 
 ### Decisions made during the build (not in the brief above; shout if any is wrong)
 
+- No Xcode on Wade's Mac. CI builds the app and deploys the cloud; his side is browser clicks and one Finder drag.
+- Sign-in for Phase 1 is email and password. Sign in with Apple needs the paid developer program (Phase 2); email link sign-in on Apple platforms depended on Firebase Dynamic Links, which shut down in 2025.
+- The app is ad-hoc signed, so macOS wants Open Anyway once per download, and keychain entries don't carry across downloads: expect to sign in again after an update until the app is properly signed at Phase 2.
 - Work hours for the automatic mode are weekdays 8:30am to 5:00pm. The toggle overrides until the next natural change.
-- Day/night follows Adelaide sunrise and sunset, computed in the app, no network.
-- The spoiler shield goes up when a session with a result starts (sprint qualifying, sprint, qualifying, race). "I've watched it" covers sessions that have started by then; when the race starts the shield goes back up on its own.
-- Result headlines are flagged in the cloud by a deliberately jumpy word list, only for headlines published after the latest result session began. A `claude-haiku-5-5` classifier can replace the list later.
-- Qualifying picks lock when Q1 starts and score 2 points for the right driver in the right slot, 1 for a top-three driver in the wrong slot.
-- The daily three draws one aviation, one F1 and one Port question from a starter bank of nine, the same three for everyone on a given day. A day counts toward the streak only if every answer was right.
+- Day/night follows Adelaide sunrise and sunset, computed in the app.
+- The spoiler shield goes up when a session with a result starts. "I've watched it" covers sessions that have started; when the race starts the shield goes back up.
+- Result headlines are flagged in the cloud by a deliberately jumpy word list, only for headlines published after the latest result session began. A `claude-haiku-5-5` classifier can replace it later. The news wire shows the newest eight per sport.
+- Qualifying picks lock when Q1 starts: 2 points for the right driver in the right slot, 1 for a top-three driver in the wrong slot.
+- The daily three draws one aviation, one F1 and one Port question from a starter bank of nine. A day counts toward the streak only if every answer was right.
 - "Looking forward to" prefers a trip within four months, otherwise the nearest thing.
-- Captures save on the Mac (`~/Library/Application Support/Lobby/captures.json`) until the cloud is wired. Reminders stay on the Mac and never go to Notion.
-- One Cloud Scheduler job, because the free tier allows three per account; two are kept for the morning top three and the Friday log.
-- Functions run in `australia-southeast1`. Firestore must be created there too.
-- Squiggle's contact email and the Notion database id are Firebase params set at first deploy; they live in `functions/.env`, which git ignores.
+- Captures save on the Mac (`~/Library/Application Support/Lobby/captures.json`) and upload when signed in. Reminders stay on the Mac and never go to Notion.
+- One Cloud Scheduler job (the free tier allows three); the other two are kept for the morning top three and the Friday log.
+- Firestore must be created in `australia-southeast1` to match the functions.
 
 ### Next steps, in order
 
-1. Wade runs it from Xcode (SETUP.md part 1) and lives with it for a bit.
-2. Wade says yes to Firebase (SETUP.md part 2) and deploys the functions.
-3. Add the Firebase SDK to the app and switch the Sports cards, then the news wire, then captures, to the cloud one at a time. Keep sample data as the fallback when the plist is missing.
-4. Work calendar: whichever route IT allows (see "Work calendar" above). EventKit is the quickest if he subscribes to his work calendar in Apple Calendar.
-5. Spotify now playing in the glance.
-6. Morning top three and the Friday 3pm log (Cloud Functions, `claude-sonnet-5-5` for the log).
+1. Wade: SETUP.md part 1 (download and open), then part 2 (Firebase, Notion, the five secrets, run the two workflows), then sign in.
+2. Me: read the first Deploy cloud run's log and fix whatever Google throws; a retry is often all the first deploy needs.
+3. Work calendar on whichever route IT allows (EventKit is quickest if he subscribes to the work calendar in Apple Calendar). Spotify in the glance. Notion projects into the Work room. Morning top three and the Friday 3pm log as functions (`claude-sonnet-5-5` for the log).
+4. Phase 2 after he's lived with it for a week.
 
-### New open questions
+### Still open
 
-- **Sign in for Phase 1.** Sign in with Apple needs the paid Apple Developer Program, which the brief puts at Phase 2. For the Mac-only phase, Firebase email link or Google sign-in with his personal Gmail would do. Which?
-- **Branch.** The build sits on `claude/new-session-x2y50h`; `main` is empty. Merge when Wade is happy.
+- From the brief: the name, the accent colour, the SwimmingSA IT request, the Instagram account type, the flight data provider.
+- Merge to `main` when Wade is happy.
