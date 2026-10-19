@@ -36,13 +36,14 @@ public struct F1RoomContent: Equatable, Sendable {
         let calendar = snapshot.f1Calendar
         let phase = previewPhase ?? calendar.phase(at: now)
         let shieldUp = shield.isUp(in: calendar, at: now)
-        let sampleTag = snapshot.isSample ? " · sample data" : ""
+        let sampleTag = snapshot.sportsLive ? "" : " · sample data"
 
-        var news = phase == .offSeason && snapshot.isSample
+        var news = phase == .offSeason && !snapshot.sportsLive
             ? SampleData.f1OffSeasonNews(team: team, now: now)
             : snapshot.f1News
         news = NewsItem.ordered(news, favouriteTag: team.id)
-        let filtered = shield.filter(news, in: calendar, at: now)
+        var filtered = shield.filter(news, in: calendar, at: now)
+        filtered.visible = Array(filtered.visible.prefix(8))
 
         let driverLines: [String] = team.drivers.prefix(2).map { driver in
             if shieldUp { return "Hidden until you watch" }

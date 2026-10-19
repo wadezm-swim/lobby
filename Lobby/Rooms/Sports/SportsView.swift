@@ -45,7 +45,7 @@ struct F1Room: View {
                         TeamChip(team: team, selected: team.id == model.team.id) { model.selectTeam(team.id) }
                     }
                 }
-                if model.snapshot.isSample {
+                if !model.snapshot.sportsLive {
                     PillPicker(
                         options: [(label: "Race week", value: F1Phase.raceWeek), (label: "Off-season", value: F1Phase.offSeason)],
                         selection: content.phase,
@@ -399,7 +399,7 @@ struct AFLRoom: View {
     var body: some View {
         let club = model.club
         let clubColor = Color(hex: club.colorHex)
-        let status = model.snapshot.aflStatus
+        let status = model.aflStatus
         VStack(alignment: .leading, spacing: 18) {
             HStack(spacing: 10) {
                 Text("Your club").font(.urbanist(14)).foregroundStyle(Palette.sportsSecondary)
@@ -417,7 +417,7 @@ struct AFLRoom: View {
                 .frame(minHeight: 44)
                 .background(Color(hex: "#141414"), in: Capsule())
                 .overlay(Capsule().strokeBorder(clubColor, lineWidth: 1.5))
-                Text("Club colours approximate" + (model.snapshot.isSample ? " · sample data" : ""))
+                Text("Club colours approximate" + (model.snapshot.sportsLive ? "" : " · sample data"))
                     .font(.urbanist(13))
                     .foregroundStyle(Color(hex: "#9B9B9F"))
             }
@@ -481,7 +481,7 @@ struct AFLRoom: View {
             }
             .fixedSize(horizontal: false, vertical: true)
 
-            NewsWireCard(items: NewsItem.ordered(model.snapshot.aflNews, favouriteTag: String(club.id)))
+            NewsWireCard(items: Array(NewsItem.ordered(model.snapshot.aflNews, favouriteTag: String(club.id)).prefix(8)))
 
             HStack(alignment: .center, spacing: 32) {
                 VStack(alignment: .leading, spacing: 4) {

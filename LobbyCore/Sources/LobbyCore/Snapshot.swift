@@ -76,8 +76,10 @@ public struct LobbySnapshot: Sendable {
     public var f1News: [NewsItem]
     public var aflStatus: AFLStatus
     public var aflNews: [NewsItem]
+    /// True once the cloud has replaced the sample sports data.
+    public var sportsLive: Bool
 
-    public init(isSample: Bool, ownerName: String, meetings: [Meeting], topThree: [TaskItem], topThreeBacklog: [TaskItem], waitingOn: [WaitingOn], projects: [Project], trips: [Trip], body: BodySummary, fleet: FleetSummary, nowPlaying: NowPlaying?, quizBank: QuizBank, f1Calendar: F1Calendar, f1Standings: [DriverStanding], f1LatestTopThree: [String]?, f1News: [NewsItem], aflStatus: AFLStatus, aflNews: [NewsItem]) {
+    public init(isSample: Bool, ownerName: String, meetings: [Meeting], topThree: [TaskItem], topThreeBacklog: [TaskItem], waitingOn: [WaitingOn], projects: [Project], trips: [Trip], body: BodySummary, fleet: FleetSummary, nowPlaying: NowPlaying?, quizBank: QuizBank, f1Calendar: F1Calendar, f1Standings: [DriverStanding], f1LatestTopThree: [String]?, f1News: [NewsItem], aflStatus: AFLStatus, aflNews: [NewsItem], sportsLive: Bool = false) {
         self.isSample = isSample
         self.ownerName = ownerName
         self.meetings = meetings
@@ -96,6 +98,7 @@ public struct LobbySnapshot: Sendable {
         self.f1News = f1News
         self.aflStatus = aflStatus
         self.aflNews = aflNews
+        self.sportsLive = sportsLive
     }
 
     public func meetings(on day: Date, clock: LobbyClock) -> [Meeting] {

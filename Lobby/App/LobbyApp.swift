@@ -9,6 +9,8 @@ struct LobbyApp: App {
 
     init() {
         FontRegistry.registerBundledFonts()
+        // Before anything touches Firebase. Quietly does nothing without the config file.
+        AppModel.shared.cloud.configure(model: AppModel.shared)
     }
 
     var body: some Scene {

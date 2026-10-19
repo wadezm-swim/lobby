@@ -2,6 +2,22 @@ import Foundation
 import Observation
 import LobbyCore
 
+/// What the cloud has sent so far. Laid over the sample snapshot so the rest
+/// stays sample until its own feed arrives.
+struct LiveSports {
+    var f1Calendar: F1Calendar?
+    var f1Standings: [DriverStanding]?
+    var f1TopThreeKnown = false
+    var f1TopThree: [String]?
+    var f1News: [NewsItem]?
+    var aflNews: [NewsItem]?
+    var afl: Cloud.AFLDoc?
+
+    var isEmpty: Bool {
+        f1Calendar == nil && f1Standings == nil && !f1TopThreeKnown && f1News == nil && aflNews == nil && afl == nil
+    }
+}
+
 /// One search hit for the concierge.
 struct SearchHit: Identifiable, Hashable {
     let id = UUID()
@@ -54,6 +70,10 @@ final class AppModel {
     /// A short confirmation, like "Saved for your Notion inbox".
     private(set) var toast: String?
     var hotKeyRegistered = true
+    /// The link to Firebase. Does nothing until the config file exists.
+    let cloud = CloudService()
+    var signInDismissed = false
+    @ObservationIgnored private var live = LiveSports()
     /// Set by the main window so the concierge and menu bar can bring it back.
     @ObservationIgnored var openMainWindow: (() -> Void)?
 
@@ -100,6 +120,7 @@ final class AppModel {
         let today = clock.dayKey(now)
         if today != snapshotDay && snapshot.isSample {
             snapshot = SampleData.snapshot(now: now, clock: clock, f1TeamID: f1TeamID)
+            overlayLive()
             snapshotDay = today
             quizFeedback = nil
             quizLog.prune(keepingDaysFrom: now, clock: clock)
@@ -113,6 +134,8 @@ final class AppModel {
     var isNight: Bool { sun.isNight(at: now) }
     var team: F1Team { F1Team.team(id: f1TeamID) ?? .mclaren }
     var club: AFLClub { AFLClub.club(id: aflClubID) ?? .portAdelaide }
+    /// Live from Squiggle when the cloud has it, else the sample.
+    var aflStatus: AFLStatus { live.afl?.status(for: club, now: now, clock: clock) ?? snapshot.aflStatus }
     var nextMeeting: Meeting? { Meeting.nextUp(in: snapshot.meetings, at: now) }
     var todaysMeetings: [Meeting] { snapshot.meetings(on: now, clock: clock) }
     var nextTrip: Trip? { snapshot.nextTrip(after: now) }
@@ -292,6 +315,13 @@ final class AppModel {
     private func record(_ capture: Capture) {
         captures.append(capture)
         captureStore.save(captures)
+        cloud.uploadQueuedCaptures()
+    }
+
+    func markCaptureSent(_ id: String) {
+        guard let index = captures.firstIndex(where: { $0.id == id }) else { return }
+        captures[index].status = .sent
+        captureStore.save(captures)
     }
 
     static func initials(for text: String) -> String {
@@ -314,11 +344,31 @@ final class AppModel {
     func selectTeam(_ id: String) {
         f1TeamID = id
         defaults.set(id, forKey: Keys.team)
-        if snapshot.isSample {
+        // The sample's F1 news names the team; live news is tagged instead.
+        if snapshot.isSample && !snapshot.sportsLive {
             let topThree = snapshot.topThree
             snapshot = SampleData.snapshot(now: now, clock: clock, f1TeamID: id)
             snapshot.topThree = topThree
+            overlayLive()
         }
+    }
+
+    // MARK: - Live data from the cloud
+
+    func applyLive(f1Calendar: F1Calendar) { live.f1Calendar = f1Calendar; overlayLive() }
+    func applyLive(f1Standings: [DriverStanding]) { live.f1Standings = f1Standings; overlayLive() }
+    func applyLive(f1TopThree: [String]?) { live.f1TopThreeKnown = true; live.f1TopThree = f1TopThree; overlayLive() }
+    func applyLive(f1News: [NewsItem]) { live.f1News = f1News; overlayLive() }
+    func applyLive(aflNews: [NewsItem]) { live.aflNews = aflNews; overlayLive() }
+    func applyLive(afl: Cloud.AFLDoc) { live.afl = afl; overlayLive() }
+
+    private func overlayLive() {
+        if let calendar = live.f1Calendar { snapshot.f1Calendar = calendar }
+        if let standings = live.f1Standings { snapshot.f1Standings = standings }
+        if live.f1TopThreeKnown { snapshot.f1LatestTopThree = live.f1TopThree }
+        if let news = live.f1News { snapshot.f1News = news }
+        if let news = live.aflNews { snapshot.aflNews = news }
+        snapshot.sportsLive = !live.isEmpty
     }
 
     func selectClub(_ id: Int) {
