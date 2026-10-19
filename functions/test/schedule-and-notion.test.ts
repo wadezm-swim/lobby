@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { inboxShape, pageFor } from "../src/notion";
+import { childDatabaseID, inboxShape, pageFor } from "../src/notion";
 import { adelaideYear, dueTasks, intervalFor } from "../src/schedule";
 
 describe("scheduling", () => {
@@ -52,6 +52,11 @@ describe("Notion", () => {
     expect(page.properties.Task).toEqual({ title: [{ text: { content: "Chase officials roster" } }] });
     expect(page.properties["Due date"]).toEqual({ date: { start: "2026-10-21" } });
     expect(page.children).toHaveLength(1);
+  });
+
+  it("finds a table typed into a page", () => {
+    expect(childDatabaseID({ results: [{ id: "p1", type: "paragraph" }, { id: "db1", type: "child_database" }] })).toBe("db1");
+    expect(childDatabaseID({ results: [{ id: "p1", type: "paragraph" }] })).toBeNull();
   });
 
   it("prefixes waiting-on items and keeps reminders out of Notion", () => {

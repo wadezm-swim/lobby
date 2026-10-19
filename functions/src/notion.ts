@@ -74,9 +74,48 @@ async function notion<T>(path: string, token: string, init: { method?: string; b
   return response.json() as Promise<T>;
 }
 
-export async function sendToNotion(capture: CaptureDoc, token: string, databaseID: string): Promise<string | null> {
-  const shape = inboxShape(await notion<DatabaseResponse>(`/databases/${databaseID}`, token));
-  const page = pageFor(capture, databaseID, shape);
+interface BlockChildren {
+  results: { id: string; type: string }[];
+}
+
+/** The first database living inside a page, if any. */
+export function childDatabaseID(children: BlockChildren): string | null {
+  return children.results.find((block) => block.type === "child_database")?.id ?? null;
+}
+
+let resolved: { input: string; databaseID: string; shape: InboxShape } | null = null;
+
+/**
+ * Accepts the ID of the inbox database itself, or of a page that holds it
+ * (Notion gives the two different links, and a table typed into a page is
+ * the second kind). Looked up once per function instance.
+ */
+async function resolveInbox(idOrPageID: string, token: string) {
+  if (resolved && resolved.input === idOrPageID) return resolved;
+  const clean = idOrPageID.trim().replace(/-/g, "");
+  let databaseID = clean;
+  let database: DatabaseResponse | null = null;
+  try {
+    database = await notion<DatabaseResponse>(`/databases/${clean}`, token);
+  } catch {
+    // Not a database: maybe a page with one inside.
+  }
+  if (!database) {
+    const children = await notion<BlockChildren>(`/blocks/${clean}/children?page_size=50`, token);
+    const inner = childDatabaseID(children);
+    if (!inner) {
+      throw new Error("NOTION_INBOX_DATABASE_ID is neither a database nor a page with a table in it. Check the link and that the Lobby integration has access to it.");
+    }
+    databaseID = inner;
+    database = await notion<DatabaseResponse>(`/databases/${databaseID}`, token);
+  }
+  resolved = { input: idOrPageID, databaseID, shape: inboxShape(database) };
+  return resolved;
+}
+
+export async function sendToNotion(capture: CaptureDoc, token: string, idOrPageID: string): Promise<string | null> {
+  const inbox = await resolveInbox(idOrPageID, token);
+  const page = pageFor(capture, inbox.databaseID, inbox.shape);
   if (!page) return null;
   const created = await notion<{ id: string }>("/pages", token, { method: "POST", body: page });
   return created.id;
